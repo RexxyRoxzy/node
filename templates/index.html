@@ -3,7 +3,7 @@
 {% block content %}
 <section class="home-hero">
     <div class="hero-content">
-        <h1>{% if g.language == 'fr' %}Bienvenue sur DiscoBots.fr{% else %}Welcome to DiscoBots.fr{% endif %}</h1>
+        <h1>{% if g.language == 'fr' %}Bienvenue sur DiscoBots{% else %}Welcome to DiscoBots{% endif %}</h1>
         <p>
             {% if g.language == 'fr' %}
             Découvrez un bot Discord puissant et facile à utiliser qui améliorera votre serveur avec des fonctionnalités étonnantes.
@@ -81,7 +81,7 @@
             <ul class="pricing-features">
                 <li>{% if g.language == 'fr' %}Accès complet aux fonctionnalités{% else %}Full access to all features{% endif %}</li>
                 <li>{% if g.language == 'fr' %}Support prioritaire{% else %}Priority support{% endif %}</li>
-                <li>{% if g.language == 'fr' %}Jusqu'à 10 serveurs{% else %}Up to 10 servers{% endif %}</li>
+                <li>{% if g.language == 'fr' %}En ligne 24/7{% else %}Online 24/7{% endif %}</li>
             </ul>
             <a href="{{ url_for('create_checkout_session') }}" class="cta-button">
                 {% if g.language == 'fr' %}Acheter maintenant{% else %}Buy Now{% endif %}
