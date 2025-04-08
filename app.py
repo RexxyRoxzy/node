@@ -141,7 +141,7 @@ def create_checkout_session():
     domain_url = request.host_url.rstrip('/')
     
     try:
-        # Create new Checkout Session for the order
+        # Create new Checkout Session for the order using existing product
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -149,10 +149,7 @@ def create_checkout_session():
                     'price_data': {
                         'currency': 'usd',
                         'unit_amount': 599,  # $5.99 in cents
-                        'product_data': {
-                            'name': 'DiscoBots Standard Plan',
-                            'description': 'Full access to all features, priority support, up to 10 servers'
-                        },
+                        'product': 'prod_S5lpY8QkDBwJhx',  # Using the specific product ID
                     },
                     'quantity': 1,
                 },
