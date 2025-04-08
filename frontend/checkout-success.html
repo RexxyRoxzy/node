@@ -1,104 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful - DiscoBots.fr</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="img/favicon.ico">
-</head>
-<body class="light">
-    <canvas id="particles-js"></canvas>
-    
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="discord.html">Discord</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                    <li class="nav-settings"><a href="settings.html">Settings</a></li>
-                    <li class="nav-logout"><a href="#" id="logout-link">Logout</a></li>
-                </ul>
-            </nav>
-            <div class="theme-toggle">
-                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
-                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
-            </div>
-            <div class="language-toggle">
-                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
-                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
-            </div>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="checkout-success">
+    <div class="success-content">
+        <h1>{% if g.language == 'fr' %}Paiement Réussi !{% else %}Payment Successful!{% endif %}</h1>
+        <div class="success-message">
+            <p>
+                {% if g.language == 'fr' %}
+                Merci pour votre achat ! Votre abonnement Standard est maintenant actif.
+                {% else %}
+                Thank you for your purchase! Your Standard subscription is now active.
+                {% endif %}
+            </p>
+            <p>
+                {% if g.language == 'fr' %}
+                Vous recevrez un e-mail de confirmation contenant tous les détails de votre commande.
+                {% else %}
+                You will receive a confirmation email containing all your order details.
+                {% endif %}
+            </p>
         </div>
-    </header>
-    
-    <main>
-        <div class="container">
-            <section class="success-section">
-                <div class="success-content">
-                    <div class="success-icon">✅</div>
-                    <h1 id="success-title">Payment Successful!</h1>
-                    <p id="success-message">Thank you for your purchase. Your subscription to DiscoBots.fr is now active.</p>
-                    <div class="success-details">
-                        <h2 id="next-steps-title">Next Steps</h2>
-                        <ol>
-                            <li id="next-step-1">Join our <a href="discord.html">Discord server</a> for support</li>
-                            <li id="next-step-2">Invite the bot to your server using the link below</li>
-                            <li id="next-step-3">Set up your bot with the customization options</li>
-                        </ol>
-                    </div>
-                    <div class="invite-button">
-                        <a href="https://discord.com/oauth2/authorize?client_id=123456789&scope=bot&permissions=8" target="_blank" class="cta-button" id="invite-bot-button">Invite Bot to Server</a>
-                    </div>
-                    <div class="back-button">
-                        <a href="index.html" class="secondary-button" id="back-home-button">Back to Home</a>
-                    </div>
-                </div>
-            </section>
+        <div class="next-steps">
+            <h3>{% if g.language == 'fr' %}Prochaines étapes{% else %}Next Steps{% endif %}</h3>
+            <ul>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Rejoignez notre <a href="{{ url_for('discord') }}">serveur Discord</a> pour obtenir de l'aide sur la configuration.
+                    {% else %}
+                    Join our <a href="{{ url_for('discord') }}">Discord server</a> to get setup assistance.
+                    {% endif %}
+                </li>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Explorez les <a href="{{ url_for('index') }}#how-to-use">guides de démarrage</a> pour configurer votre bot.
+                    {% else %}
+                    Check out the <a href="{{ url_for('index') }}#how-to-use">getting started guides</a> to set up your bot.
+                    {% endif %}
+                </li>
+            </ul>
         </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </div>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="index.html" id="footer-home">Home</a></li>
-                        <li><a href="discord.html">Discord</a></li>
-                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
-                        <li><a href="index.html#pricing" id="footer-pricing">Pricing</a></li>
-                        <li><a href="index.html#faq" id="footer-faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <p id="footer-contact-us">Contact Us</p>
-                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="js/particles.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/api.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Redirect to login if not logged in
-            if (!isLoggedIn()) {
-                window.location.href = 'login.html';
-            }
-        });
-    </script>
-</body>
-</html>
+        <a href="{{ url_for('index') }}" class="cta-button">
+            {% if g.language == 'fr' %}Retour à l'accueil{% else %}Return Home{% endif %}
+        </a>
+    </div>
+</section>
+{% endblock %}

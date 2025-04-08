@@ -1,100 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Cancelled - DiscoBots.fr</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="img/favicon.ico">
-</head>
-<body class="light">
-    <canvas id="particles-js"></canvas>
-    
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="discord.html">Discord</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                    <li class="nav-settings"><a href="settings.html">Settings</a></li>
-                    <li class="nav-logout"><a href="#" id="logout-link">Logout</a></li>
-                </ul>
-            </nav>
-            <div class="theme-toggle">
-                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
-                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
-            </div>
-            <div class="language-toggle">
-                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
-                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
-            </div>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="checkout-cancel">
+    <div class="cancel-content">
+        <h1>{% if g.language == 'fr' %}Paiement Annulé{% else %}Payment Cancelled{% endif %}</h1>
+        <div class="cancel-message">
+            <p>
+                {% if g.language == 'fr' %}
+                Votre processus de paiement a été annulé. Aucun frais n'a été encouru.
+                {% else %}
+                Your payment process was cancelled. No charges were made.
+                {% endif %}
+            </p>
+            <p>
+                {% if g.language == 'fr' %}
+                Si vous avez rencontré des problèmes ou si vous avez des questions, n'hésitez pas à nous contacter.
+                {% else %}
+                If you experienced any issues or have questions, feel free to contact us.
+                {% endif %}
+            </p>
         </div>
-    </header>
-    
-    <main>
-        <div class="container">
-            <section class="cancel-section">
-                <div class="cancel-content">
-                    <div class="cancel-icon">❌</div>
-                    <h1 id="cancel-title">Payment Cancelled</h1>
-                    <p id="cancel-message">Your payment was cancelled. No charges were made to your account.</p>
-                    <div class="cancel-options">
-                        <h2 id="try-again-title">Would you like to try again?</h2>
-                        <div class="cancel-buttons">
-                            <a href="checkout.html" class="cta-button" id="try-again-button">Try Again</a>
-                            <a href="index.html" class="secondary-button" id="back-home-button">Back to Home</a>
-                        </div>
-                    </div>
-                    <div class="cancel-help">
-                        <p id="help-message">If you're having trouble with the payment process or have any questions, please <a href="discord.html">join our Discord server</a> for assistance or contact us at <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>.</p>
-                    </div>
-                </div>
-            </section>
+        <div class="options">
+            <a href="{{ url_for('create_checkout_session') }}" class="cta-button">
+                {% if g.language == 'fr' %}Réessayer{% else %}Try Again{% endif %}
+            </a>
+            <a href="{{ url_for('index') }}" class="cta-button secondary">
+                {% if g.language == 'fr' %}Retour à l'accueil{% else %}Return Home{% endif %}
+            </a>
         </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </div>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="index.html" id="footer-home">Home</a></li>
-                        <li><a href="discord.html">Discord</a></li>
-                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
-                        <li><a href="index.html#pricing" id="footer-pricing">Pricing</a></li>
-                        <li><a href="index.html#faq" id="footer-faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <p id="footer-contact-us">Contact Us</p>
-                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="js/particles.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/api.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Redirect to login if not logged in
-            if (!isLoggedIn()) {
-                window.location.href = 'login.html';
-            }
-        });
-    </script>
-</body>
-</html>
+    </div>
+</section>
+{% endblock %}

@@ -1,263 +1,249 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiscoBots.fr - Discord Bots for Your Server</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="img/favicon.ico">
-</head>
-<body class="light">
-    <canvas id="particles-js"></canvas>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="home-hero">
+    <div class="hero-content">
+        <h1>{% if g.language == 'fr' %}Bienvenue sur DiscoBots{% else %}Welcome to DiscoBots{% endif %}</h1>
+        <p>
+            {% if g.language == 'fr' %}
+            Découvrez un bot Discord puissant et facile à utiliser qui améliorera votre serveur avec des fonctionnalités étonnantes.
+            {% else %}
+            Discover a powerful and easy-to-use Discord bot that will enhance your server with amazing features.
+            {% endif %}
+        </p>
+        <a href="{{ url_for('discord') }}" class="cta-button">
+            {% if g.language == 'fr' %}Ajouter à Discord{% else %}Add to Discord{% endif %}
+        </a>
+    </div>
+</section>
+
+<section class="features">
+    <h2>{% if g.language == 'fr' %}Fonctionnalités{% else %}Features{% endif %}</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>{% if g.language == 'fr' %}Modération{% else %}Moderation{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Gardez votre serveur propre et sécurisé avec des outils de modération avancés.
+                {% else %}
+                Keep your server clean and secure with advanced moderation tools.
+                {% endif %}
+            </p>
+        </div>
+        <div class="feature-card">
+            <h3>{% if g.language == 'fr' %}Musique{% else %}Music{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Jouez de la musique de haute qualité depuis diverses plateformes.
+                {% else %}
+                Play high-quality music from various platforms.
+                {% endif %}
+            </p>
+        </div>
+        <div class="feature-card">
+            <h3>{% if g.language == 'fr' %}Personnalisation{% else %}Customization{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Adaptez le bot à votre serveur avec des options de personnalisation étendues.
+                {% else %}
+                Tailor the bot to your server with extensive customization options.
+                {% endif %}
+            </p>
+        </div>
+        <div class="feature-card">
+            <h3>{% if g.language == 'fr' %}Économie{% else %}Economy{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Créez un système économique engageant pour votre communauté.
+                {% else %}
+                Create an engaging economy system for your community.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="pricing" id="pricing">
+    <h2>{% if g.language == 'fr' %}Tarification{% else %}Pricing{% endif %}</h2>
     
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
+    <div class="promotion-banner">
+        {% if g.language == 'fr' %}
+        <span>🔥 Offre Spéciale: Utilisez le code <span class="coupon-code">DISCO30</span> pour obtenir 30% de réduction! 🔥</span>
+        {% else %}
+        <span>🔥 Special Offer: Use code <span class="coupon-code">DISCO30</span> for 30% off! 🔥</span>
+        {% endif %}
+    </div>
+    
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>{% if g.language == 'fr' %}Standard{% else %}Standard{% endif %}</h3>
+            <div class="price">$5.99</div>
+            <ul class="pricing-features">
+                <li>{% if g.language == 'fr' %}Accès complet aux fonctionnalités{% else %}Full access to all features{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Support prioritaire{% else %}Priority support{% endif %}</li>
+                <li>{% if g.language == 'fr' %}En ligne 24/7{% else %}Online 24/7{% endif %}</li>
+            </ul>
+            <a href="{{ url_for('create_checkout_session') }}" class="cta-button">
+                {% if g.language == 'fr' %}Acheter maintenant{% else %}Buy Now{% endif %}
+            </a>
+            <div style="margin-top: 10px; font-size: 0.9em;">
+                <a href="{{ url_for('create_checkout_session', voucher='Uflvb62d') }}" style="text-decoration: underline;">
+                    {% if g.language == 'fr' %}Utiliser le code promotion{% else %}Use discount code{% endif %}
                 </a>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="discord.html">Discord</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                    <li class="nav-login"><a href="login.html">Login</a></li>
-                    <li class="nav-register"><a href="register.html">Register</a></li>
-                    <li class="nav-settings hidden"><a href="settings.html">Settings</a></li>
-                    <li class="nav-logout hidden"><a href="#" id="logout-link">Logout</a></li>
-                </ul>
-            </nav>
-            <div class="theme-toggle">
-                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
-                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
+        </div>
+        <div class="pricing-card featured">
+            <h3>{% if g.language == 'fr' %}Personnalisé{% else %}Custom{% endif %}</h3>
+            <div class="price">{% if g.language == 'fr' %}Contactez-nous{% else %}Contact Us{% endif %}</div>
+            <ul class="pricing-features">
+                <li>{% if g.language == 'fr' %}Fonctionnalités personnalisées{% else %}Custom features{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Support dédié 24/7{% else %}24/7 Dedicated support{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Serveurs illimités{% else %}Unlimited servers{% endif %}</li>
+            </ul>
+            <a href="mailto:discobots.com@gmail.com" class="cta-button secondary">
+                {% if g.language == 'fr' %}Contactez-nous{% else %}Contact Us{% endif %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="how-to-use" id="how-to-use">
+    <h2>{% if g.language == 'fr' %}Comment utiliser{% else %}How to Use{% endif %}</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>{% if g.language == 'fr' %}Inviter le bot{% else %}Invite the Bot{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Cliquez sur le bouton "Ajouter à Discord" pour inviter le bot sur votre serveur.
+                {% else %}
+                Click the "Add to Discord" button to invite the bot to your server.
+                {% endif %}
+            </p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>{% if g.language == 'fr' %}Configuration{% else %}Configuration{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Utilisez la commande !setup pour configurer le bot selon vos préférences.
+                {% else %}
+                Use the !setup command to configure the bot according to your preferences.
+                {% endif %}
+            </p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>{% if g.language == 'fr' %}Profitez{% else %}Enjoy{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Votre bot est maintenant prêt à l'emploi ! Utilisez !help pour voir toutes les commandes.
+                {% else %}
+                Your bot is now ready to use! Type !help to see all available commands.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <h2>{% if g.language == 'fr' %}Foire Aux Questions{% else %}Frequently Asked Questions{% endif %}</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Est-ce que je peux utiliser le bot gratuitement ?
+                {% else %}
+                Can I use the bot for free?
+                {% endif %}
             </div>
-            <div class="language-toggle">
-                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
-                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Oui, vous pouvez utiliser la version de base gratuitement, mais avec des fonctionnalités limitées. Pour un accès complet, envisagez notre forfait Standard à $5.99.
+                {% else %}
+                Yes, you can use the basic version for free, but with limited features. For full access, consider our Standard plan at $5.99.
+                {% endif %}
             </div>
         </div>
-    </header>
-    
-    <main>
-        <div class="container">
-            <div class="flash-messages" id="flash-messages"></div>
-            <div class="user-greeting hidden" id="user-greeting">
-                <p>Hello <span id="username-display"></span>!</p>
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Comment puis-je obtenir de l'aide si j'ai un problème ?
+                {% else %}
+                How can I get help if I have an issue?
+                {% endif %}
             </div>
-            
-            <section class="hero-section">
-                <div class="hero-content">
-                    <h1 id="hero-title">Enhance Your Discord Server</h1>
-                    <p id="hero-description">DiscoBots.fr provides powerful, customizable Discord bots to improve moderation, engagement, and fun on your server.</p>
-                    <div class="hero-cta">
-                        <a href="#pricing" class="cta-button" id="get-started-button">Get Started</a>
-                        <a href="discord.html" class="secondary-button" id="learn-more-button">Learn More</a>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="special-offer-section">
-                <div class="special-offer-content">
-                    <div class="offer-badge" id="special-offer-badge">Limited Offer!</div>
-                    <h2 id="special-offer-title">30% Off First Month</h2>
-                    <p id="special-offer-description">Use voucher code <strong>Uflvb62d</strong> during checkout to claim your discount!</p>
-                    <div class="countdown-container">
-                        <p id="offer-ends-text">Offer ends in:</p>
-                        <div class="countdown-timer" id="countdown-timer">
-                            <div class="countdown-item">
-                                <span id="countdown-hours">48</span>
-                                <span id="hours-label">hours</span>
-                            </div>
-                            <div class="countdown-item">
-                                <span id="countdown-minutes">00</span>
-                                <span id="minutes-label">minutes</span>
-                            </div>
-                            <div class="countdown-item">
-                                <span id="countdown-seconds">00</span>
-                                <span id="seconds-label">seconds</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="features-section">
-                <h2 id="features-title">Key Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🛡️</div>
-                        <h3 id="moderation-title">Moderation</h3>
-                        <p id="moderation-description">Powerful moderation tools to keep your server safe and clean.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎵</div>
-                        <h3 id="music-title">Music</h3>
-                        <p id="music-description">High-quality music playback from various sources.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">👋</div>
-                        <h3 id="welcome-title">Welcome</h3>
-                        <p id="welcome-description">Customize welcome messages and auto-roles for new members.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎮</div>
-                        <h3 id="games-title">Games</h3>
-                        <p id="games-description">Fun games to boost engagement in your community.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3 id="stats-title">Statistics</h3>
-                        <p id="stats-description">Track server activity and member engagement.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⚙️</div>
-                        <h3 id="customization-title">Customization</h3>
-                        <p id="customization-description">Tailor the bot to fit your server's unique needs.</p>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="pricing-section" id="pricing">
-                <h2 id="pricing-title">Pricing Plans</h2>
-                <div class="pricing-container">
-                    <div class="pricing-card">
-                        <div class="pricing-header">
-                            <h3 id="standard-plan-title">Standard Plan</h3>
-                            <div class="pricing-price">
-                                <span id="price-amount">$5.99</span>
-                                <span id="price-period">/ month</span>
-                            </div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul>
-                                <li id="standard-feature-1">✅ Moderation commands</li>
-                                <li id="standard-feature-2">✅ Custom welcome messages</li>
-                                <li id="standard-feature-3">✅ Auto-roles</li>
-                                <li id="standard-feature-4">✅ Music commands</li>
-                                <li id="standard-feature-5">✅ 24/7 Support</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="checkout.html" class="cta-button" id="standard-cta-button">Subscribe Now</a>
-                        </div>
-                    </div>
-                    <div class="pricing-card custom-card">
-                        <div class="pricing-header">
-                            <h3 id="custom-plan-title">Custom Plan</h3>
-                            <div class="pricing-price">
-                                <span id="custom-price">Contact Us</span>
-                            </div>
-                        </div>
-                        <div class="pricing-features">
-                            <ul>
-                                <li id="custom-feature-1">✅ All Standard features</li>
-                                <li id="custom-feature-2">✅ Custom commands</li>
-                                <li id="custom-feature-3">✅ Advanced automations</li>
-                                <li id="custom-feature-4">✅ Custom development</li>
-                                <li id="custom-feature-5">✅ Priority support</li>
-                            </ul>
-                        </div>
-                        <div class="pricing-cta">
-                            <a href="discord.html" class="secondary-button" id="custom-cta-button">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="how-to-section">
-                <h2 id="how-to-title">How to Use</h2>
-                <div class="steps-container">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <h3 id="step1-title">Subscribe</h3>
-                        <p id="step1-description">Choose a plan and complete the payment process.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <h3 id="step2-title">Invite Bot</h3>
-                        <p id="step2-description">Add the bot to your Discord server with one click.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <h3 id="step3-title">Configure</h3>
-                        <p id="step3-description">Customize settings to match your server's needs.</p>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">4</div>
-                        <h3 id="step4-title">Enjoy</h3>
-                        <p id="step4-description">Start using the commands and features!</p>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="faq-section" id="faq">
-                <h2 id="faq-title">Frequently Asked Questions</h2>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <div class="faq-question" id="faq1-question">What is DiscoBots.fr?</div>
-                        <div class="faq-answer" id="faq1-answer">DiscoBots.fr provides customizable Discord bots that help server owners moderate their communities, enhance user engagement, and add fun features to their servers.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" id="faq2-question">How do I add the bot to my server?</div>
-                        <div class="faq-answer" id="faq2-answer">After subscribing, you'll receive an invite link. Click on it, select your server, and authorize the bot with the required permissions.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" id="faq3-question">Can I cancel my subscription?</div>
-                        <div class="faq-answer" id="faq3-answer">Yes, you can cancel your subscription at any time from your account settings. Your subscription will remain active until the end of the current billing period.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" id="faq4-question">Do you offer discounts?</div>
-                        <div class="faq-answer" id="faq4-answer">Yes, we periodically offer special discounts. Currently, we have a 30% discount for the first month with the voucher code Uflvb62d.</div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" id="faq5-question">How can I get support?</div>
-                        <div class="faq-answer" id="faq5-answer">You can join our Discord server for immediate support, or contact us via email at discobots.com@gmail.com.</div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="cta-section">
-                <div class="cta-content">
-                    <h2 id="cta-title">Ready to enhance your Discord server?</h2>
-                    <p id="cta-description">Join thousands of server owners who trust DiscoBots.fr</p>
-                    <div class="cta-buttons">
-                        <a href="#pricing" class="cta-button" id="cta-pricing-button">View Pricing</a>
-                        <a href="discord.html" class="secondary-button" id="cta-discord-button">Join Discord</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </div>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="index.html" id="footer-home">Home</a></li>
-                        <li><a href="discord.html">Discord</a></li>
-                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
-                        <li><a href="#pricing" id="footer-pricing">Pricing</a></li>
-                        <li><a href="#faq" id="footer-faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <p id="footer-contact-us">Contact Us</p>
-                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Rejoignez notre serveur Discord pour obtenir de l'aide de notre équipe de support ou contactez-nous directement à discobots.com@gmail.com.
+                {% else %}
+                Join our Discord server to get help from our support team, or contact us directly at discobots.com@gmail.com.
+                {% endif %}
             </div>
         </div>
-    </footer>
-    
-    <script src="js/particles.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/api.js"></script>
-</body>
-</html>
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Puis-je personnaliser les commandes du bot ?
+                {% else %}
+                Can I customize the bot's commands?
+                {% endif %}
+            </div>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Oui, notre bot offre de nombreuses options de personnalisation. Avec le forfait Standard, vous pouvez personnaliser davantage de commandes et de fonctionnalités.
+                {% else %}
+                Yes, our bot offers many customization options. With the Standard plan, you can customize even more commands and features.
+                {% endif %}
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Le bot fonctionne-t-il sur mobile ?
+                {% else %}
+                Does the bot work on mobile?
+                {% endif %}
+            </div>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Oui, notre bot fonctionne parfaitement sur toutes les plateformes où Discord est disponible, y compris les appareils mobiles.
+                {% else %}
+                Yes, our bot works seamlessly on all platforms where Discord is available, including mobile devices.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="special-offer-section">
+    <h3>{% if g.language == 'fr' %}Offre exclusive pour les nouveaux utilisateurs{% else %}Exclusive Offer for New Users{% endif %}</h3>
+    <p>
+        {% if g.language == 'fr' %}
+        Inscrivez-vous aujourd'hui et obtenez un mois d'essai gratuit du plan Standard ! Pas besoin de carte de crédit.
+        {% else %}
+        Sign up today and get a free 1-month trial of the Standard plan! No credit card required.
+        {% endif %}
+    </p>
+    <div class="countdown-timer">
+        <span id="countdown">48:00:00</span>
+    </div>
+    <a href="{{ url_for('register') }}" class="cta-button">
+        {% if g.language == 'fr' %}S'inscrire maintenant{% else %}Sign Up Now{% endif %}
+    </a>
+</section>
+
+<section class="testimonials">
+    <h2>{% if g.language == 'fr' %}Ce que les utilisateurs disent{% else %}What Users Say{% endif %}</h2>
+    <div class="testimonial-slider">
+        <div class="testimonial">
+            <p>"{% if g.language == 'fr' %}Le meilleur bot que j'ai utilisé pour mon serveur ! Les fonctionnalités de modération sont vraiment impressionnantes.{% else %}The best bot I've used for my server! The moderation features are really impressive.{% endif %}"</p>
+            <cite>- Neporrex</cite>
+        </div>
+        <div class="testimonial">
+            <p>"{% if g.language == 'fr' %}La qualité de la musique est excellente, et le bot est très stable. Hautement recommandé !{% else %}The music quality is excellent, and the bot is very stable. Highly recommended!{% endif %}"</p>
+            <cite>- Belunoobs</cite>
+        </div>
+    </div>
+</section>
+{% endblock %}

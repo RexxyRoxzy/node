@@ -1,160 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms & Privacy - DiscoBots.fr</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="img/favicon.ico">
-</head>
-<body class="light">
-    <canvas id="particles-js"></canvas>
-    
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </a>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="discord.html">Discord</a></li>
-                    <li><a href="terms.html" class="active">Terms</a></li>
-                    <li class="nav-login"><a href="login.html">Login</a></li>
-                    <li class="nav-register"><a href="register.html">Register</a></li>
-                    <li class="nav-settings hidden"><a href="settings.html">Settings</a></li>
-                    <li class="nav-logout hidden"><a href="#" id="logout-link">Logout</a></li>
-                </ul>
-            </nav>
-            <div class="theme-toggle">
-                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
-                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
-            </div>
-            <div class="language-toggle">
-                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
-                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
-            </div>
-        </div>
-    </header>
-    
-    <main>
-        <div class="container">
-            <div class="flash-messages" id="flash-messages"></div>
+{% extends "base.html" %}
+
+{% block content %}
+<section class="terms-section">
+    <div class="terms-content">
+        <h1>{% if g.language == 'fr' %}Conditions d'utilisation & Politique de confidentialité{% else %}Terms of Service & Privacy Policy{% endif %}</h1>
+        
+        <div class="terms-block">
+            <h2>{% if g.language == 'fr' %}Conditions d'utilisation{% else %}Terms of Service{% endif %}</h2>
             
-            <section class="terms-section">
-                <h1 id="terms-title">Terms of Service & Privacy Policy</h1>
-                
-                <div class="terms-content">
-                    <h2 id="terms-subtitle">Terms of Service</h2>
-                    
-                    <h3 id="terms-effective-date">Effective Date: April 1, 2024</h3>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-acceptance">1. Acceptance of Terms</h4>
-                        <p id="terms-acceptance-text">By accessing or using DiscoBots.fr services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-services">2. Description of Services</h4>
-                        <p id="terms-services-text">DiscoBots.fr provides Discord bot services that enhance your Discord server experience. Our services include but are not limited to moderation tools, entertainment features, and server management utilities.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-account">3. User Accounts</h4>
-                        <p id="terms-account-text">To access certain features of our service, you must create an account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-payment">4. Payment Terms</h4>
-                        <p id="terms-payment-text">Some features of our service require payment. By purchasing these features, you agree to pay the fees indicated. All payments are processed through secure third-party payment processors. Refunds are issued at our discretion.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-conduct">5. User Conduct</h4>
-                        <p id="terms-conduct-text">You agree not to use our services for any unlawful purpose or in violation of Discord's Terms of Service. We reserve the right to terminate accounts that violate these terms.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-modifications">6. Modifications to Service</h4>
-                        <p id="terms-modifications-text">We reserve the right to modify or discontinue our services at any time without notice. We will not be liable if all or any part of the service is unavailable.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="terms-termination">7. Termination</h4>
-                        <p id="terms-termination-text">We may terminate your access to our services for violations of these terms. You may terminate your account at any time.</p>
-                    </div>
-                    
-                    <h2 id="privacy-subtitle">Privacy Policy</h2>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-collection">1. Information Collection</h4>
-                        <p id="privacy-collection-text">We collect information that you provide directly to us, such as when you create an account, purchase services, or contact us for support. This information may include your name, email address, Discord user ID, and payment information.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-usage">2. Information Usage</h4>
-                        <p id="privacy-usage-text">We use the information we collect to provide, maintain, and improve our services, to process transactions, to communicate with you, and to protect our users and service.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-sharing">3. Information Sharing</h4>
-                        <p id="privacy-sharing-text">We do not sell or rent your personal information to third parties. We may share information with third-party service providers that perform services on our behalf, such as payment processing and data analysis.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-security">4. Data Security</h4>
-                        <p id="privacy-security-text">We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the Internet is 100% secure.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-rights">5. Your Rights</h4>
-                        <p id="privacy-rights-text">You have the right to access, correct, or delete your personal information. You may also object to or restrict certain processing of your information. To exercise these rights, please contact us at discobots.com@gmail.com.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-changes">6. Changes to this Policy</h4>
-                        <p id="privacy-changes-text">We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
-                    </div>
-                    
-                    <div class="terms-block">
-                        <h4 id="privacy-contact">7. Contact Us</h4>
-                        <p id="privacy-contact-text">If you have any questions about our Terms of Service or Privacy Policy, please contact us at discobots.com@gmail.com.</p>
-                    </div>
-                </div>
-            </section>
+            <h3>{% if g.language == 'fr' %}1. Acceptation des conditions{% else %}1. Acceptance of Terms{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                En utilisant DiscoBots, vous acceptez d'être lié par ces conditions. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre service.
+                {% else %}
+                By using DiscoBots, you agree to be bound by these terms. If you do not agree to these terms, please do not use our service.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}2. Description du service{% else %}2. Service Description{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                DiscoBots fournit un bot Discord avec diverses fonctionnalités pour améliorer l'expérience de votre serveur Discord.
+                {% else %}
+                DiscoBots provides a Discord bot with various features to enhance your Discord server experience.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}3. Utilisation acceptable{% else %}3. Acceptable Use{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Vous acceptez de ne pas utiliser DiscoBots pour des activités illégales ou interdites. Nous nous réservons le droit de suspendre ou de résilier votre accès si vous violez ces conditions.
+                {% else %}
+                You agree not to use DiscoBots for any illegal or prohibited activities. We reserve the right to suspend or terminate your access if you violate these terms.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}4. Modifications{% else %}4. Modifications{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Nous nous réservons le droit de modifier ces conditions à tout moment. Les modifications entrent en vigueur dès leur publication.
+                {% else %}
+                We reserve the right to modify these terms at any time. Modifications become effective as soon as they are posted.
+                {% endif %}
+            </p>
         </div>
-    </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="img/logo.png" alt="DiscoBots.fr">
-                </div>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="index.html" id="footer-home">Home</a></li>
-                        <li><a href="discord.html">Discord</a></li>
-                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
-                        <li><a href="index.html#pricing" id="footer-pricing">Pricing</a></li>
-                        <li><a href="index.html#faq" id="footer-faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <p id="footer-contact-us">Contact Us</p>
-                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
-            </div>
+        
+        <div class="privacy-block">
+            <h2>{% if g.language == 'fr' %}Politique de confidentialité{% else %}Privacy Policy{% endif %}</h2>
+            
+            <h3>{% if g.language == 'fr' %}1. Informations collectées{% else %}1. Information Collected{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Nous collectons certaines informations lors de votre utilisation de DiscoBots, y compris votre nom d'utilisateur Discord, l'ID de votre serveur, et les commandes que vous utilisez.
+                {% else %}
+                We collect certain information when you use DiscoBots, including your Discord username, server ID, and the commands you use.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}2. Utilisation des informations{% else %}2. Use of Information{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Nous utilisons ces informations pour fournir et améliorer nos services, personnaliser votre expérience, et communiquer avec vous.
+                {% else %}
+                We use this information to provide and improve our services, personalize your experience, and communicate with you.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}3. Partage d'informations{% else %}3. Information Sharing{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Nous ne vendons pas vos informations personnelles à des tiers. Nous pouvons partager vos informations avec des fournisseurs de services qui nous aident à exploiter DiscoBots.
+                {% else %}
+                We do not sell your personal information to third parties. We may share your information with service providers who help us operate DiscoBots.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}4. Sécurité{% else %}4. Security{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Nous prenons des mesures raisonnables pour protéger vos informations contre l'accès non autorisé ou la divulgation.
+                {% else %}
+                We take reasonable measures to protect your information from unauthorized access or disclosure.
+                {% endif %}
+            </p>
+            
+            <h3>{% if g.language == 'fr' %}5. Contact{% else %}5. Contact{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Si vous avez des questions concernant notre politique de confidentialité, veuillez nous contacter à discobots.com@gmail.com.
+                {% else %}
+                If you have any questions about our privacy policy, please contact us at discobots.com@gmail.com.
+                {% endif %}
+            </p>
         </div>
-    </footer>
-    
-    <script src="js/particles.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/api.js"></script>
-</body>
-</html>
+    </div>
+</section>
+{% endblock %}

@@ -1,172 +1,107 @@
-// API.js - For interacting with the DiscoBots.fr API
+// API integration for DiscoBots frontend
+const API_URL = '/api';
 
-// API URL - You should replace this with your actual API URL when deploying
-// For Netlify, this will be replaced by the environment variable through netlify.toml
-const API_URL = window.API_URL || 'http://localhost:5000';
-
-// Try to get API_URL from Netlify environment
-document.addEventListener('DOMContentLoaded', function() {
-  // This script tag will be injected by Netlify with the API_URL
-  // <script>window.API_URL = "https://api.discobots.fr";</script>
-  if (!window.API_URL) {
-    console.log('API_URL not set, using localhost for development');
-  }
-});
-
-// Register a new user
 async function register(username, email, password) {
     try {
-        const response = await fetch(`${API_URL}/api/register`, {
+        const response = await fetch(`${API_URL}/register`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                username,
-                email,
-                password
-            })
+            body: JSON.stringify({ username, email, password }),
         });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            return { success: true, message: data.message };
-        } else {
-            return { success: false, message: data.message || 'Registration failed' };
-        }
+        return await response.json();
     } catch (error) {
         console.error('Registration error:', error);
-        return { success: false, message: 'Network error. Please try again later.' };
+        return { success: false, message: 'Network error occurred' };
     }
 }
 
-// Login user
 async function login(username, password) {
     try {
-        const response = await fetch(`${API_URL}/api/login`, {
+        const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                username,
-                password
-            })
+            body: JSON.stringify({ username, password }),
         });
-        
         const data = await response.json();
-        
-        if (response.ok) {
-            // Store token in localStorage
+        if (data.success) {
             localStorage.setItem('token', data.token);
-            return { success: true, message: data.message };
-        } else {
-            return { success: false, message: data.message || 'Login failed' };
+            localStorage.setItem('user', JSON.stringify(data.user));
         }
+        return data;
     } catch (error) {
         console.error('Login error:', error);
-        return { success: false, message: 'Network error. Please try again later.' };
+        return { success: false, message: 'Network error occurred' };
     }
 }
 
-// Get current user information
 async function getUserInfo() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        return null;
+    }
+    
     try {
-        const token = localStorage.getItem('token');
-        
-        if (!token) {
-            return null;
-        }
-        
-        const response = await fetch(`${API_URL}/api/user`, {
-            method: 'GET',
+        const response = await fetch(`${API_URL}/user`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
-        
-        if (response.ok) {
-            return await response.json();
-        } else {
-            // If unauthorized, clear token
-            if (response.status === 401) {
-                localStorage.removeItem('token');
-            }
-            return null;
-        }
+        return await response.json();
     } catch (error) {
-        console.error('User info error:', error);
+        console.error('Get user info error:', error);
         return null;
     }
 }
 
-// Update user settings
 async function updateUserSettings(settings) {
-    try {
-        const token = localStorage.getItem('token');
-        
-        if (!token) {
-            return { success: false, message: 'Not logged in' };
-        }
-        
-        const response = await fetch(`${API_URL}/api/settings`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify(settings)
-        });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            return { success: true, message: data.message };
-        } else {
-            // If unauthorized, clear token
-            if (response.status === 401) {
-                localStorage.removeItem('token');
-            }
-            return { success: false, message: data.message || 'Failed to update settings' };
-        }
-    } catch (error) {
-        console.error('Update settings error:', error);
-        return { success: false, message: 'Network error. Please try again later.' };
+    const token = localStorage.getItem('token');
+    if (!token) {
+        return { success: false, message: 'Not authenticated' };
     }
-}
-
-// Create a checkout session
-async function createCheckoutSession(voucher = null) {
+    
     try {
-        const token = localStorage.getItem('token');
-        
-        if (!token) {
-            return { success: false, message: 'Not logged in' };
-        }
-        
-        const response = await fetch(`${API_URL}/api/create-checkout-session`, {
+        const response = await fetch(`${API_URL}/settings`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ voucher })
+            body: JSON.stringify(settings),
         });
-        
+        return await response.json();
+    } catch (error) {
+        console.error('Update settings error:', error);
+        return { success: false, message: 'Network error occurred' };
+    }
+}
+
+async function createCheckoutSession(voucher = null) {
+    const token = localStorage.getItem('token');
+    const headers = {
+        'Content-Type': 'application/json'
+    };
+    
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    try {
+        const response = await fetch(`${API_URL}/create-checkout`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ voucher }),
+        });
         const data = await response.json();
-        
-        if (response.ok) {
-            return { success: true, url: data.url };
-        } else {
-            // If unauthorized, clear token
-            if (response.status === 401) {
-                localStorage.removeItem('token');
-            }
-            return { success: false, message: data.message || 'Failed to create checkout session' };
+        if (data.success && data.url) {
+            window.location.href = data.url;
         }
+        return data;
     } catch (error) {
         console.error('Checkout error:', error);
-        return { success: false, message: 'Network error. Please try again later.' };
+        return { success: false, message: 'Network error occurred' };
     }
 }
