@@ -1,131 +1,70 @@
-{% extends 'base.html' %}
-
-{% block title %}Join Our Discord Server{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-<section class="discord-hero">
-    <div class="discord-hero-content">
-        <h1>Join Our Discord Community</h1>
-        <p>Get support, share ideas, and connect with other users of our Discord bot.</p>
-        <a href="https://discord.gg/example" target="_blank" class="btn btn-primary discord-btn">
-            <i class="fab fa-discord"></i> Join Discord Server
+<section class="discord-section">
+    <div class="discord-content">
+        <h1>{% if g.language == 'fr' %}Rejoignez notre serveur Discord{% else %}Join Our Discord Server{% endif %}</h1>
+        <p>
+            {% if g.language == 'fr' %}
+            Rejoignez notre communauté Discord pour obtenir de l'aide, discuter avec d'autres utilisateurs, et rester informé des dernières mises à jour de DiscoBots.
+            {% else %}
+            Join our Discord community to get help, chat with other users, and stay updated on the latest DiscoBots updates.
+            {% endif %}
+        </p>
+        
+        <div class="discord-invite">
+            <a href="https://discord.gg/XBY893MsgC" target="_blank" class="discord-button">
+                {% if g.language == 'fr' %}Rejoindre le serveur Discord{% else %}Join Discord Server{% endif %}
+            </a>
+        </div>
+        
+        <div class="discord-benefits">
+            <h2>{% if g.language == 'fr' %}Avantages{% else %}Benefits{% endif %}</h2>
+            <ul>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Support direct et rapide de notre équipe
+                    {% else %}
+                    Direct and quick support from our team
+                    {% endif %}
+                </li>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Accès anticipé aux nouvelles fonctionnalités
+                    {% else %}
+                    Early access to new features
+                    {% endif %}
+                </li>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Rencontrez d'autres administrateurs de serveurs
+                    {% else %}
+                    Meet other server administrators
+                    {% endif %}
+                </li>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Participez à des événements exclusifs
+                    {% else %}
+                    Participate in exclusive events
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="discord-add-bot">
+        <h2>{% if g.language == 'fr' %}Ajouter le bot à votre serveur{% else %}Add the Bot to Your Server{% endif %}</h2>
+        <p>
+            {% if g.language == 'fr' %}
+            Prêt à améliorer votre serveur avec DiscoBots ? Cliquez sur le bouton ci-dessous pour ajouter le bot à votre serveur Discord.
+            {% else %}
+            Ready to enhance your server with DiscoBots? Click the button below to add the bot to your Discord server.
+            {% endif %}
+        </p>
+        <a href="https://discord.com/oauth2/authorize?client_id=123456789012345678&scope=bot&permissions=8" target="_blank" class="bot-add-button">
+            {% if g.language == 'fr' %}Ajouter le bot{% else %}Add Bot{% endif %}
         </a>
     </div>
-    <div class="discord-hero-image">
-        <img src="https://images.unsplash.com/photo-1463620695885-8a91d87c53d0" alt="Discord Community" class="discord-img">
-    </div>
-</section>
-
-<section class="discord-benefits">
-    <h2>Why Join Our Discord Server?</h2>
-    <div class="benefits-grid">
-        <div class="benefit-card">
-            <i class="fas fa-headset"></i>
-            <h3>Direct Support</h3>
-            <p>Get direct assistance from our support team for any questions or issues you might have.</p>
-        </div>
-        <div class="benefit-card">
-            <i class="fas fa-lightbulb"></i>
-            <h3>Feature Requests</h3>
-            <p>Suggest new features and help shape the future development of our Discord bot.</p>
-        </div>
-        <div class="benefit-card">
-            <i class="fas fa-book"></i>
-            <h3>Tutorials & Guides</h3>
-            <p>Access detailed guides and tutorials to get the most out of our bot's features.</p>
-        </div>
-        <div class="benefit-card">
-            <i class="fas fa-users"></i>
-            <h3>Community</h3>
-            <p>Connect with other server owners and share tips and tricks about Discord management.</p>
-        </div>
-    </div>
-</section>
-
-<section class="discord-steps">
-    <h2>How to Join and Get Started</h2>
-    <div class="steps-container">
-        <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-                <h3>Join Our Discord Server</h3>
-                <p>Click the button below to join our community Discord server.</p>
-                <a href="https://discord.gg/example" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-discord"></i> Join Now
-                </a>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-                <h3>Verify Your Account</h3>
-                <p>Complete the verification process to gain access to all channels.</p>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-number">3</div>
-            <div class="step-content">
-                <h3>Ask for Support</h3>
-                <p>Visit the support channels to get help with bot setup and configuration.</p>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-number">4</div>
-            <div class="step-content">
-                <h3>Request Custom Features</h3>
-                <p>Talk to our team about custom commands and features for your server.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="discord-faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>How do I get support for the bot?</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Join our Discord server and use the dedicated support channels to get help from our team and community.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Can I request custom features?</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Absolutely! Join our Discord and talk to our development team about your custom needs and pricing.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>How do I install the bot on my server?</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                <p>After purchasing, you'll receive an invite link to add the bot to your server. We also provide setup assistance in our Discord.</p>
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">
-                <h3>Is there a trial version available?</h3>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                <p>We offer limited-time trials for server owners. Contact us in our Discord server to request a trial.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="cta-section">
-    <h2>Ready to Join Our Community?</h2>
-    <p>Join our Discord server now and get started with our powerful Discord bot.</p>
-    <a href="https://discord.gg/example" target="_blank" class="btn btn-primary discord-btn">
-        <i class="fab fa-discord"></i> Join Discord Server
-    </a>
 </section>
 {% endblock %}

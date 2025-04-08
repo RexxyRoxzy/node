@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-section">
+    <div class="auth-form">
+        <h1>{% if g.language == 'fr' %}Créer un compte{% else %}Register{% endif %}</h1>
+        <form method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(size=32, class="form-control") }}
+                {% for error in form.username.errors %}
+                <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(size=32, class="form-control") }}
+                {% for error in form.email.errors %}
+                <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(size=32, class="form-control") }}
+                {% for error in form.password.errors %}
+                <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.password2.label }}
+                {{ form.password2(size=32, class="form-control") }}
+                {% for error in form.password2.errors %}
+                <span class="error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="form-actions">
+                {{ form.submit(class="submit-button") }}
+            </div>
+        </form>
+        <div class="auth-links">
+            <p>{% if g.language == 'fr' %}Déjà inscrit ?{% else %}Already registered?{% endif %} <a href="{{ url_for('login') }}">{% if g.language == 'fr' %}Se connecter{% else %}Sign In{% endif %}</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
