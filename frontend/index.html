@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiscoBots.fr</title>
+    <title>DiscoBots.fr - Discord Bots for Your Server</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/favicon.ico">
 </head>
@@ -22,10 +22,10 @@
                     <li><a href="index.html" class="active">Home</a></li>
                     <li><a href="discord.html">Discord</a></li>
                     <li><a href="terms.html">Terms</a></li>
-                    <li><a href="login.html" id="login-link">Login</a></li>
-                    <li><a href="register.html" id="register-link">Register</a></li>
-                    <li><a href="settings.html" id="settings-link" style="display: none;">Settings</a></li>
-                    <li><a href="#" id="logout-link" style="display: none;">Logout</a></li>
+                    <li class="nav-login"><a href="login.html">Login</a></li>
+                    <li class="nav-register"><a href="register.html">Register</a></li>
+                    <li class="nav-settings hidden"><a href="settings.html">Settings</a></li>
+                    <li class="nav-logout hidden"><a href="#" id="logout-link">Logout</a></li>
                 </ul>
             </nav>
             <div class="theme-toggle">
@@ -42,97 +42,191 @@
     <main>
         <div class="container">
             <div class="flash-messages" id="flash-messages"></div>
-            
-            <div class="user-greeting" id="user-greeting" style="display: none;">
-                Hello <span id="username"></span>!
+            <div class="user-greeting hidden" id="user-greeting">
+                <p>Hello <span id="username-display"></span>!</p>
             </div>
             
-            <section class="home-hero">
+            <section class="hero-section">
                 <div class="hero-content">
-                    <h1 id="welcome-text">Welcome to DiscoBots.fr</h1>
-                    <p id="intro-text">
-                        Discover a powerful and easy-to-use Discord bot that will enhance your server with amazing features.
-                    </p>
-                    <a href="discord.html" class="cta-button" id="add-discord-text">
-                        Add to Discord
-                    </a>
-                </div>
-            </section>
-
-            <section class="features">
-                <h2 id="features-title">Features</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3 id="moderation-title">Moderation</h3>
-                        <p id="moderation-text">
-                            Keep your server clean and secure with advanced moderation tools.
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 id="music-title">Music</h3>
-                        <p id="music-text">
-                            Play high-quality music from various platforms.
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 id="customization-title">Customization</h3>
-                        <p id="customization-text">
-                            Tailor the bot to your server with extensive customization options.
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 id="economy-title">Economy</h3>
-                        <p id="economy-text">
-                            Create an engaging economy system for your community.
-                        </p>
+                    <h1 id="hero-title">Enhance Your Discord Server</h1>
+                    <p id="hero-description">DiscoBots.fr provides powerful, customizable Discord bots to improve moderation, engagement, and fun on your server.</p>
+                    <div class="hero-cta">
+                        <a href="#pricing" class="cta-button" id="get-started-button">Get Started</a>
+                        <a href="discord.html" class="secondary-button" id="learn-more-button">Learn More</a>
                     </div>
                 </div>
             </section>
-
-            <section class="pricing" id="pricing">
-                <h2 id="pricing-title">Pricing</h2>
-                
-                <div class="promotion-banner">
-                    <span id="promo-text">🔥 Special Offer: Use code <span class="coupon-code">DISCO30</span> for 30% off! 🔥</span>
-                </div>
-                
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3 id="standard-title">Standard</h3>
-                        <div class="price">$5.99</div>
-                        <ul class="pricing-features">
-                            <li id="features-access">Full access to all features</li>
-                            <li id="priority-support">Priority support</li>
-                            <li id="servers-limit">Up to 10 servers</li>
-                        </ul>
-                        <a href="#" class="cta-button" id="buy-button">
-                            Buy Now
-                        </a>
-                        <div style="margin-top: 10px; font-size: 0.9em;">
-                            <a href="#" id="discount-link" style="text-decoration: underline;">
-                                Use discount code
-                            </a>
+            
+            <section class="special-offer-section">
+                <div class="special-offer-content">
+                    <div class="offer-badge" id="special-offer-badge">Limited Offer!</div>
+                    <h2 id="special-offer-title">30% Off First Month</h2>
+                    <p id="special-offer-description">Use voucher code <strong>Uflvb62d</strong> during checkout to claim your discount!</p>
+                    <div class="countdown-container">
+                        <p id="offer-ends-text">Offer ends in:</p>
+                        <div class="countdown-timer" id="countdown-timer">
+                            <div class="countdown-item">
+                                <span id="countdown-hours">48</span>
+                                <span id="hours-label">hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="countdown-minutes">00</span>
+                                <span id="minutes-label">minutes</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span id="countdown-seconds">00</span>
+                                <span id="seconds-label">seconds</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="pricing-card featured">
-                        <h3 id="custom-title">Custom</h3>
-                        <div class="price" id="contact-us-text">Contact Us</div>
-                        <ul class="pricing-features">
-                            <li id="custom-features">Custom features</li>
-                            <li id="dedicated-support">24/7 Dedicated support</li>
-                            <li id="unlimited-servers">Unlimited servers</li>
-                        </ul>
-                        <a href="mailto:discobots.com@gmail.com" class="cta-button secondary" id="contact-button">
-                            Contact Us
-                        </a>
+                </div>
+            </section>
+            
+            <section class="features-section">
+                <h2 id="features-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 id="moderation-title">Moderation</h3>
+                        <p id="moderation-description">Powerful moderation tools to keep your server safe and clean.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎵</div>
+                        <h3 id="music-title">Music</h3>
+                        <p id="music-description">High-quality music playback from various sources.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👋</div>
+                        <h3 id="welcome-title">Welcome</h3>
+                        <p id="welcome-description">Customize welcome messages and auto-roles for new members.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3 id="games-title">Games</h3>
+                        <p id="games-description">Fun games to boost engagement in your community.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 id="stats-title">Statistics</h3>
+                        <p id="stats-description">Track server activity and member engagement.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h3 id="customization-title">Customization</h3>
+                        <p id="customization-description">Tailor the bot to fit your server's unique needs.</p>
                     </div>
                 </div>
             </section>
-
-            <!-- Other sections would go here... -->
             
-            <!-- FAQ, How to Use, Special Offer, Testimonials sections - abbreviated for brevity -->
+            <section class="pricing-section" id="pricing">
+                <h2 id="pricing-title">Pricing Plans</h2>
+                <div class="pricing-container">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 id="standard-plan-title">Standard Plan</h3>
+                            <div class="pricing-price">
+                                <span id="price-amount">$5.99</span>
+                                <span id="price-period">/ month</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li id="standard-feature-1">✅ Moderation commands</li>
+                                <li id="standard-feature-2">✅ Custom welcome messages</li>
+                                <li id="standard-feature-3">✅ Auto-roles</li>
+                                <li id="standard-feature-4">✅ Music commands</li>
+                                <li id="standard-feature-5">✅ 24/7 Support</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="checkout.html" class="cta-button" id="standard-cta-button">Subscribe Now</a>
+                        </div>
+                    </div>
+                    <div class="pricing-card custom-card">
+                        <div class="pricing-header">
+                            <h3 id="custom-plan-title">Custom Plan</h3>
+                            <div class="pricing-price">
+                                <span id="custom-price">Contact Us</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul>
+                                <li id="custom-feature-1">✅ All Standard features</li>
+                                <li id="custom-feature-2">✅ Custom commands</li>
+                                <li id="custom-feature-3">✅ Advanced automations</li>
+                                <li id="custom-feature-4">✅ Custom development</li>
+                                <li id="custom-feature-5">✅ Priority support</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-cta">
+                            <a href="discord.html" class="secondary-button" id="custom-cta-button">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
             
+            <section class="how-to-section">
+                <h2 id="how-to-title">How to Use</h2>
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 id="step1-title">Subscribe</h3>
+                        <p id="step1-description">Choose a plan and complete the payment process.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 id="step2-title">Invite Bot</h3>
+                        <p id="step2-description">Add the bot to your Discord server with one click.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 id="step3-title">Configure</h3>
+                        <p id="step3-description">Customize settings to match your server's needs.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 id="step4-title">Enjoy</h3>
+                        <p id="step4-description">Start using the commands and features!</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="faq-section" id="faq">
+                <h2 id="faq-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" id="faq1-question">What is DiscoBots.fr?</div>
+                        <div class="faq-answer" id="faq1-answer">DiscoBots.fr provides customizable Discord bots that help server owners moderate their communities, enhance user engagement, and add fun features to their servers.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" id="faq2-question">How do I add the bot to my server?</div>
+                        <div class="faq-answer" id="faq2-answer">After subscribing, you'll receive an invite link. Click on it, select your server, and authorize the bot with the required permissions.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" id="faq3-question">Can I cancel my subscription?</div>
+                        <div class="faq-answer" id="faq3-answer">Yes, you can cancel your subscription at any time from your account settings. Your subscription will remain active until the end of the current billing period.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" id="faq4-question">Do you offer discounts?</div>
+                        <div class="faq-answer" id="faq4-answer">Yes, we periodically offer special discounts. Currently, we have a 30% discount for the first month with the voucher code Uflvb62d.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" id="faq5-question">How can I get support?</div>
+                        <div class="faq-answer" id="faq5-answer">You can join our Discord server for immediate support, or contact us via email at discobots.com@gmail.com.</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2 id="cta-title">Ready to enhance your Discord server?</h2>
+                    <p id="cta-description">Join thousands of server owners who trust DiscoBots.fr</p>
+                    <div class="cta-buttons">
+                        <a href="#pricing" class="cta-button" id="cta-pricing-button">View Pricing</a>
+                        <a href="discord.html" class="secondary-button" id="cta-discord-button">Join Discord</a>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
     

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - DiscoBots.fr</title>
+    <title>Payment Cancelled - DiscoBots.fr</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/favicon.ico">
 </head>
@@ -22,8 +22,8 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="discord.html">Discord</a></li>
                     <li><a href="terms.html">Terms</a></li>
-                    <li><a href="login.html" class="active">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
+                    <li class="nav-settings"><a href="settings.html">Settings</a></li>
+                    <li class="nav-logout"><a href="#" id="logout-link">Logout</a></li>
                 </ul>
             </nav>
             <div class="theme-toggle">
@@ -39,32 +39,20 @@
     
     <main>
         <div class="container">
-            <div class="flash-messages" id="flash-messages"></div>
-            
-            <section class="auth-section">
-                <h1 id="login-title">Login</h1>
-                <div class="auth-container">
-                    <form id="login-form">
-                        <div class="form-group">
-                            <label for="username" id="username-label">Username</label>
-                            <input type="text" id="username" name="username" class="form-control" required>
+            <section class="cancel-section">
+                <div class="cancel-content">
+                    <div class="cancel-icon">❌</div>
+                    <h1 id="cancel-title">Payment Cancelled</h1>
+                    <p id="cancel-message">Your payment was cancelled. No charges were made to your account.</p>
+                    <div class="cancel-options">
+                        <h2 id="try-again-title">Would you like to try again?</h2>
+                        <div class="cancel-buttons">
+                            <a href="checkout.html" class="cta-button" id="try-again-button">Try Again</a>
+                            <a href="index.html" class="secondary-button" id="back-home-button">Back to Home</a>
                         </div>
-                        <div class="form-group">
-                            <label for="password" id="password-label">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="form-group remember-me">
-                            <input type="checkbox" id="remember-me" name="remember-me">
-                            <label for="remember-me" id="remember-me-label">Remember Me</label>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="cta-button" id="login-button">Sign In</button>
-                        </div>
-                    </form>
-                    <div class="auth-links">
-                        <p id="no-account-text">
-                            No account yet? <a href="register.html" id="register-link-text">Register</a>
-                        </p>
+                    </div>
+                    <div class="cancel-help">
+                        <p id="help-message">If you're having trouble with the payment process or have any questions, please <a href="discord.html">join our Discord server</a> for assistance or contact us at <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>.</p>
                     </div>
                 </div>
             </section>
@@ -100,5 +88,13 @@
     <script src="js/particles.js"></script>
     <script src="js/main.js"></script>
     <script src="js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Redirect to login if not logged in
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Server - DiscoBots.fr</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body class="light">
+    <canvas id="particles-js"></canvas>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="discord.html" class="active">Discord</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li class="nav-login"><a href="login.html">Login</a></li>
+                    <li class="nav-register"><a href="register.html">Register</a></li>
+                    <li class="nav-settings hidden"><a href="settings.html">Settings</a></li>
+                    <li class="nav-logout hidden"><a href="#" id="logout-link">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
+                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
+            </div>
+            <div class="language-toggle">
+                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
+                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="flash-messages" id="flash-messages"></div>
+            
+            <section class="discord-section">
+                <h1 id="discord-title">Discord Server</h1>
+                <div class="discord-content">
+                    <div class="discord-info">
+                        <p id="discord-description">Join our Discord server to get support, chat with our community, and stay updated on the latest DiscoBots features and news.</p>
+                        <div class="discord-cta">
+                            <a href="https://discord.gg/XBY893MsgC" target="_blank" class="cta-button discord-button" id="join-discord-button">Join Discord Server</a>
+                        </div>
+                    </div>
+                    <div class="discord-preview">
+                        <div class="discord-iframe-container">
+                            <iframe src="https://discord.com/widget?id=1234567890&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="discord-features">
+                    <h2 id="discord-features-title">Server Features</h2>
+                    <ul class="feature-list">
+                        <li>
+                            <div class="feature-icon">💬</div>
+                            <div class="feature-content">
+                                <h3 id="support-channel-title">24/7 Support Channels</h3>
+                                <p id="support-channel-desc">Get help from our team and community members at any time.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">🤖</div>
+                            <div class="feature-content">
+                                <h3 id="bot-commands-title">Bot Commands Testing</h3>
+                                <p id="bot-commands-desc">Test our bot commands and see all features in action.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">🎉</div>
+                            <div class="feature-content">
+                                <h3 id="events-title">Events & Giveaways</h3>
+                                <p id="events-desc">Participate in regular events and win awesome prizes.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">👥</div>
+                            <div class="feature-content">
+                                <h3 id="community-title">Growing Community</h3>
+                                <p id="community-desc">Connect with like-minded Discord users and bot enthusiasts.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html" id="footer-home">Home</a></li>
+                        <li><a href="discord.html">Discord</a></li>
+                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
+                        <li><a href="index.html#pricing" id="footer-pricing">Pricing</a></li>
+                        <li><a href="index.html#faq" id="footer-faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <p id="footer-contact-us">Contact Us</p>
+                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

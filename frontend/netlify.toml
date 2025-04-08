@@ -1,7 +1,25 @@
+# Netlify configuration for DiscoBots.fr frontend
 [build]
   publish = "/"
-  
+
+# Handle SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  
+# Set environment variables
+[context.production.environment]
+  API_URL = "https://api.discobots.fr"
+
+[context.deploy-preview.environment]
+  API_URL = "https://api-staging.discobots.fr"
+
+# Inject API_URL into HTML
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline';"
+
+[[plugins]]
+  package = "@netlify/plugin-inject-env-vars-client-side"

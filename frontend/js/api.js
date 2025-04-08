@@ -1,7 +1,19 @@
-// API Configuration
-const API_URL = 'https://your-backend-api-url.com'; // Replace with your actual backend API URL
+// API.js - For interacting with the DiscoBots.fr API
 
-// API Functions
+// API URL - You should replace this with your actual API URL when deploying
+// For Netlify, this will be replaced by the environment variable through netlify.toml
+const API_URL = window.API_URL || 'http://localhost:5000';
+
+// Try to get API_URL from Netlify environment
+document.addEventListener('DOMContentLoaded', function() {
+  // This script tag will be injected by Netlify with the API_URL
+  // <script>window.API_URL = "https://api.discobots.fr";</script>
+  if (!window.API_URL) {
+    console.log('API_URL not set, using localhost for development');
+  }
+});
+
+// Register a new user
 async function register(username, email, password) {
     try {
         const response = await fetch(`${API_URL}/api/register`, {
@@ -12,29 +24,24 @@ async function register(username, email, password) {
             body: JSON.stringify({
                 username,
                 email,
-                password,
-                theme: localStorage.getItem('theme') || 'light',
-                language: localStorage.getItem('language') || 'en'
+                password
             })
         });
         
         const data = await response.json();
         
-        if (!response.ok) {
-            throw new Error(data.message || 'Registration failed');
+        if (response.ok) {
+            return { success: true, message: data.message };
+        } else {
+            return { success: false, message: data.message || 'Registration failed' };
         }
-        
-        // Save token and user data
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        return data;
     } catch (error) {
-        console.error('Register error:', error);
-        throw error;
+        console.error('Registration error:', error);
+        return { success: false, message: 'Network error. Please try again later.' };
     }
 }
 
+// Login user
 async function login(username, password) {
     try {
         const response = await fetch(`${API_URL}/api/login`, {
@@ -50,35 +57,26 @@ async function login(username, password) {
         
         const data = await response.json();
         
-        if (!response.ok) {
-            throw new Error(data.message || 'Login failed');
+        if (response.ok) {
+            // Store token in localStorage
+            localStorage.setItem('token', data.token);
+            return { success: true, message: data.message };
+        } else {
+            return { success: false, message: data.message || 'Login failed' };
         }
-        
-        // Save token and user data
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        // Update UI theme and language from user preferences
-        if (data.user.theme) {
-            setTheme(data.user.theme);
-        }
-        
-        if (data.user.language) {
-            setLanguage(data.user.language);
-        }
-        
-        return data;
     } catch (error) {
         console.error('Login error:', error);
-        throw error;
+        return { success: false, message: 'Network error. Please try again later.' };
     }
 }
 
+// Get current user information
 async function getUserInfo() {
     try {
         const token = localStorage.getItem('token');
+        
         if (!token) {
-            throw new Error('Not authenticated');
+            return null;
         }
         
         const response = await fetch(`${API_URL}/api/user`, {
@@ -88,34 +86,28 @@ async function getUserInfo() {
             }
         });
         
-        const data = await response.json();
-        
-        if (!response.ok) {
+        if (response.ok) {
+            return await response.json();
+        } else {
+            // If unauthorized, clear token
             if (response.status === 401) {
-                // Token expired or invalid
                 localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                updateAuthUI();
             }
-            throw new Error(data.message || 'Failed to get user info');
+            return null;
         }
-        
-        // Update stored user data
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        return data.user;
     } catch (error) {
-        console.error('Get user info error:', error);
-        throw error;
+        console.error('User info error:', error);
+        return null;
     }
 }
 
+// Update user settings
 async function updateUserSettings(settings) {
     try {
         const token = localStorage.getItem('token');
+        
         if (!token) {
-            // Not logged in, just update local settings
-            return false;
+            return { success: false, message: 'Not logged in' };
         }
         
         const response = await fetch(`${API_URL}/api/settings`, {
@@ -129,36 +121,29 @@ async function updateUserSettings(settings) {
         
         const data = await response.json();
         
-        if (!response.ok) {
+        if (response.ok) {
+            return { success: true, message: data.message };
+        } else {
+            // If unauthorized, clear token
             if (response.status === 401) {
-                // Token expired or invalid
                 localStorage.removeItem('token');
-                localStorage.removeItem('user');
-                updateAuthUI();
             }
-            throw new Error(data.message || 'Failed to update settings');
+            return { success: false, message: data.message || 'Failed to update settings' };
         }
-        
-        // Update stored user data
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        return true;
     } catch (error) {
         console.error('Update settings error:', error);
-        return false;
+        return { success: false, message: 'Network error. Please try again later.' };
     }
 }
 
+// Create a checkout session
 async function createCheckoutSession(voucher = null) {
     try {
-        // Check if user is logged in
-        if (!isLoggedIn()) {
-            // Redirect to login page
-            window.location.href = 'login.html?redirect=checkout';
-            return;
-        }
-        
         const token = localStorage.getItem('token');
+        
+        if (!token) {
+            return { success: false, message: 'Not logged in' };
+        }
         
         const response = await fetch(`${API_URL}/api/create-checkout-session`, {
             method: 'POST',
@@ -166,103 +151,22 @@ async function createCheckoutSession(voucher = null) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({
-                voucher: voucher,
-                success_url: `${window.location.origin}/checkout-success.html`,
-                cancel_url: `${window.location.origin}/checkout-cancel.html`,
-            })
+            body: JSON.stringify({ voucher })
         });
         
         const data = await response.json();
         
-        if (!response.ok) {
-            throw new Error(data.message || 'Failed to create checkout session');
+        if (response.ok) {
+            return { success: true, url: data.url };
+        } else {
+            // If unauthorized, clear token
+            if (response.status === 401) {
+                localStorage.removeItem('token');
+            }
+            return { success: false, message: data.message || 'Failed to create checkout session' };
         }
-        
-        // Redirect to Stripe checkout
-        window.location.href = data.url;
     } catch (error) {
         console.error('Checkout error:', error);
-        showFlashMessage('Error creating checkout session: ' + error.message, 'error');
+        return { success: false, message: 'Network error. Please try again later.' };
     }
 }
-
-// Handle form submissions
-document.addEventListener('DOMContentLoaded', function() {
-    // Login form
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            try {
-                await login(username, password);
-                
-                // Check for redirect parameter
-                const urlParams = new URLSearchParams(window.location.search);
-                const redirect = urlParams.get('redirect');
-                
-                if (redirect === 'checkout') {
-                    // Redirect to checkout
-                    createCheckoutSession();
-                } else {
-                    // Redirect to home page
-                    window.location.href = 'index.html';
-                }
-            } catch (error) {
-                showFlashMessage(error.message, 'error');
-            }
-        });
-    }
-    
-    // Registration form
-    const registerForm = document.getElementById('register-form');
-    if (registerForm) {
-        registerForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const password2 = document.getElementById('password2').value;
-            
-            if (password !== password2) {
-                showFlashMessage('Passwords do not match', 'error');
-                return;
-            }
-            
-            try {
-                await register(username, email, password);
-                showFlashMessage('Registration successful! You are now logged in.', 'success');
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
-            } catch (error) {
-                showFlashMessage(error.message, 'error');
-            }
-        });
-    }
-    
-    // Settings form
-    const settingsForm = document.getElementById('settings-form');
-    if (settingsForm) {
-        settingsForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const theme = document.getElementById('theme').value;
-            const language = document.getElementById('language').value;
-            
-            try {
-                await updateUserSettings({ theme, language });
-                setTheme(theme);
-                setLanguage(language);
-                showFlashMessage('Settings updated successfully', 'success');
-            } catch (error) {
-                showFlashMessage(error.message, 'error');
-            }
-        });
-    }
-});

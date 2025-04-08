@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - DiscoBots.fr</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body class="light">
+    <canvas id="particles-js"></canvas>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li class="nav-settings"><a href="settings.html" class="active">Settings</a></li>
+                    <li class="nav-logout"><a href="#" id="logout-link">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
+                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
+            </div>
+            <div class="language-toggle">
+                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
+                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="flash-messages" id="flash-messages"></div>
+            
+            <section class="settings-section">
+                <h1 id="settings-title">Settings</h1>
+                <div class="user-greeting" id="user-greeting">
+                    <p>Hello <span id="username-display"></span>!</p>
+                </div>
+                <div class="settings-container">
+                    <form id="settings-form">
+                        <div class="form-group">
+                            <label for="theme" id="theme-label">Theme</label>
+                            <select id="theme" name="theme" class="form-control">
+                                <option value="light" id="theme-light">White</option>
+                                <option value="dark" id="theme-dark">Black</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="language" id="language-label">Language</label>
+                            <select id="language" name="language" class="form-control">
+                                <option value="en" id="language-en">English</option>
+                                <option value="fr" id="language-fr">Français</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="cta-button" id="save-settings-button">Save Settings</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="subscription-section">
+                    <h2 id="subscription-title">Subscription</h2>
+                    <div class="subscription-status">
+                        <p id="subscription-status-text">You don't have an active subscription.</p>
+                        <a href="checkout.html" class="cta-button" id="subscribe-button">Subscribe Now</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html" id="footer-home">Home</a></li>
+                        <li><a href="discord.html">Discord</a></li>
+                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
+                        <li><a href="index.html#pricing" id="footer-pricing">Pricing</a></li>
+                        <li><a href="index.html#faq" id="footer-faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <p id="footer-contact-us">Contact Us</p>
+                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        // Redirect to login if not logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+            } else {
+                // Fill user info
+                getUserInfo().then(user => {
+                    document.getElementById('username-display').textContent = user.username;
+                    document.getElementById('theme').value = user.theme;
+                    document.getElementById('language').value = user.language;
+                });
+            }
+            
+            // Handle settings form submission
+            document.getElementById('settings-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const theme = document.getElementById('theme').value;
+                const language = document.getElementById('language').value;
+                
+                updateUserSettings({ theme, language })
+                    .then(response => {
+                        if (response.success) {
+                            setTheme(theme);
+                            setLanguage(language);
+                            showFlashMessage('Settings updated successfully', 'success');
+                        } else {
+                            showFlashMessage('Failed to update settings', 'error');
+                        }
+                    })
+                    .catch(err => {
+                        showFlashMessage('An error occurred: ' + err.message, 'error');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

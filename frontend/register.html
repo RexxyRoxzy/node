@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - DiscoBots.fr</title>
+    <title>Register - DiscoBots.fr</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="img/favicon.ico">
 </head>
@@ -22,8 +22,8 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="discord.html">Discord</a></li>
                     <li><a href="terms.html">Terms</a></li>
-                    <li><a href="login.html" class="active">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html" class="active">Register</a></li>
                 </ul>
             </nav>
             <div class="theme-toggle">
@@ -42,28 +42,32 @@
             <div class="flash-messages" id="flash-messages"></div>
             
             <section class="auth-section">
-                <h1 id="login-title">Login</h1>
+                <h1 id="register-title">Register</h1>
                 <div class="auth-container">
-                    <form id="login-form">
+                    <form id="register-form">
                         <div class="form-group">
                             <label for="username" id="username-label">Username</label>
                             <input type="text" id="username" name="username" class="form-control" required>
                         </div>
                         <div class="form-group">
+                            <label for="email" id="email-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
                             <label for="password" id="password-label">Password</label>
                             <input type="password" id="password" name="password" class="form-control" required>
                         </div>
-                        <div class="form-group remember-me">
-                            <input type="checkbox" id="remember-me" name="remember-me">
-                            <label for="remember-me" id="remember-me-label">Remember Me</label>
+                        <div class="form-group">
+                            <label for="password2" id="password2-label">Repeat Password</label>
+                            <input type="password" id="password2" name="password2" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="cta-button" id="login-button">Sign In</button>
+                            <button type="submit" class="cta-button" id="register-button">Create Account</button>
                         </div>
                     </form>
                     <div class="auth-links">
-                        <p id="no-account-text">
-                            No account yet? <a href="register.html" id="register-link-text">Register</a>
+                        <p id="already-account-text">
+                            Already registered? <a href="login.html" id="login-link-text">Login</a>
                         </p>
                     </div>
                 </div>
