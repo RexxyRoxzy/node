@@ -63,6 +63,145 @@
     </div>
 </section>
 
+<section class="pricing" id="pricing">
+    <h2>{% if g.language == 'fr' %}Tarification{% else %}Pricing{% endif %}</h2>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>{% if g.language == 'fr' %}Standard{% else %}Standard{% endif %}</h3>
+            <div class="price">$5.99</div>
+            <ul class="pricing-features">
+                <li>{% if g.language == 'fr' %}Accès complet aux fonctionnalités{% else %}Full access to all features{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Support prioritaire{% else %}Priority support{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Jusqu'à 10 serveurs{% else %}Up to 10 servers{% endif %}</li>
+            </ul>
+            <a href="{{ url_for('create_checkout_session') }}" class="cta-button">
+                {% if g.language == 'fr' %}Acheter maintenant{% else %}Buy Now{% endif %}
+            </a>
+        </div>
+        <div class="pricing-card featured">
+            <h3>{% if g.language == 'fr' %}Personnalisé{% else %}Custom{% endif %}</h3>
+            <div class="price">{% if g.language == 'fr' %}Contactez-nous{% else %}Contact Us{% endif %}</div>
+            <ul class="pricing-features">
+                <li>{% if g.language == 'fr' %}Fonctionnalités personnalisées{% else %}Custom features{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Support dédié 24/7{% else %}24/7 Dedicated support{% endif %}</li>
+                <li>{% if g.language == 'fr' %}Serveurs illimités{% else %}Unlimited servers{% endif %}</li>
+            </ul>
+            <a href="mailto:discobots.com@gmail.com" class="cta-button secondary">
+                {% if g.language == 'fr' %}Contactez-nous{% else %}Contact Us{% endif %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="how-to-use" id="how-to-use">
+    <h2>{% if g.language == 'fr' %}Comment utiliser{% else %}How to Use{% endif %}</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <h3>{% if g.language == 'fr' %}Inviter le bot{% else %}Invite the Bot{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Cliquez sur le bouton "Ajouter à Discord" pour inviter le bot sur votre serveur.
+                {% else %}
+                Click the "Add to Discord" button to invite the bot to your server.
+                {% endif %}
+            </p>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <h3>{% if g.language == 'fr' %}Configuration{% else %}Configuration{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Utilisez la commande !setup pour configurer le bot selon vos préférences.
+                {% else %}
+                Use the !setup command to configure the bot according to your preferences.
+                {% endif %}
+            </p>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <h3>{% if g.language == 'fr' %}Profitez{% else %}Enjoy{% endif %}</h3>
+            <p>
+                {% if g.language == 'fr' %}
+                Votre bot est maintenant prêt à l'emploi ! Utilisez !help pour voir toutes les commandes.
+                {% else %}
+                Your bot is now ready to use! Type !help to see all available commands.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <h2>{% if g.language == 'fr' %}Foire Aux Questions{% else %}Frequently Asked Questions{% endif %}</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Est-ce que je peux utiliser le bot gratuitement ?
+                {% else %}
+                Can I use the bot for free?
+                {% endif %}
+            </div>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Oui, vous pouvez utiliser la version de base gratuitement, mais avec des fonctionnalités limitées. Pour un accès complet, envisagez notre forfait Standard à $5.99.
+                {% else %}
+                Yes, you can use the basic version for free, but with limited features. For full access, consider our Standard plan at $5.99.
+                {% endif %}
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Comment puis-je obtenir de l'aide si j'ai un problème ?
+                {% else %}
+                How can I get help if I have an issue?
+                {% endif %}
+            </div>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Rejoignez notre serveur Discord pour obtenir de l'aide de notre équipe de support ou contactez-nous directement à discobots.com@gmail.com.
+                {% else %}
+                Join our Discord server to get help from our support team, or contact us directly at discobots.com@gmail.com.
+                {% endif %}
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Puis-je personnaliser les commandes du bot ?
+                {% else %}
+                Can I customize the bot's commands?
+                {% endif %}
+            </div>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Oui, notre bot offre de nombreuses options de personnalisation. Avec le forfait Standard, vous pouvez personnaliser davantage de commandes et de fonctionnalités.
+                {% else %}
+                Yes, our bot offers many customization options. With the Standard plan, you can customize even more commands and features.
+                {% endif %}
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                {% if g.language == 'fr' %}
+                Le bot fonctionne-t-il sur mobile ?
+                {% else %}
+                Does the bot work on mobile?
+                {% endif %}
+            </div>
+            <div class="faq-answer">
+                {% if g.language == 'fr' %}
+                Oui, notre bot fonctionne parfaitement sur toutes les plateformes où Discord est disponible, y compris les appareils mobiles.
+                {% else %}
+                Yes, our bot works seamlessly on all platforms where Discord is available, including mobile devices.
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="testimonials">
     <h2>{% if g.language == 'fr' %}Ce que les utilisateurs disent{% else %}What Users Say{% endif %}</h2>
     <div class="testimonial-slider">

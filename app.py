@@ -1,4 +1,6 @@
 import os
+import requests
+import json
 from flask import Flask, render_template, redirect, url_for, flash, request, session, g
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
@@ -128,6 +130,34 @@ def set_theme(theme):
     else:
         session['theme'] = theme
     return redirect(request.referrer or url_for('index'))
+
+@app.route('/create-checkout-session', methods=['GET', 'POST'])
+def create_checkout_session():
+    # Get Saleor API key and domain from environment variables
+    saleor_api_key = os.environ.get("SALEOR_API_KEY")
+    
+    # Set up headers for Saleor API requests
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {saleor_api_key}"
+    }
+
+    # For demo purposes, you would normally create or retrieve a real checkout
+    # Here we're just showing a success page
+    success_url = url_for('checkout_success', _external=True)
+    
+    # In a real implementation, this would connect to Saleor API
+    # For now, we'll simply redirect to a success page
+    flash('Payment process initiated - Standard plan: $5.99')
+    return redirect(success_url)
+
+@app.route('/checkout/success')
+def checkout_success():
+    return render_template('checkout_success.html', title='Payment Successful')
+
+@app.route('/checkout/cancel')
+def checkout_cancel():
+    return render_template('checkout_cancel.html', title='Payment Cancelled')
 
 with app.app_context():
     db.create_all()

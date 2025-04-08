@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="checkout-success">
+    <div class="success-content">
+        <h1>{% if g.language == 'fr' %}Paiement Réussi !{% else %}Payment Successful!{% endif %}</h1>
+        <div class="success-message">
+            <p>
+                {% if g.language == 'fr' %}
+                Merci pour votre achat ! Votre abonnement Standard est maintenant actif.
+                {% else %}
+                Thank you for your purchase! Your Standard subscription is now active.
+                {% endif %}
+            </p>
+            <p>
+                {% if g.language == 'fr' %}
+                Vous recevrez un e-mail de confirmation contenant tous les détails de votre commande.
+                {% else %}
+                You will receive a confirmation email containing all your order details.
+                {% endif %}
+            </p>
+        </div>
+        <div class="next-steps">
+            <h3>{% if g.language == 'fr' %}Prochaines étapes{% else %}Next Steps{% endif %}</h3>
+            <ul>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Rejoignez notre <a href="{{ url_for('discord') }}">serveur Discord</a> pour obtenir de l'aide sur la configuration.
+                    {% else %}
+                    Join our <a href="{{ url_for('discord') }}">Discord server</a> to get setup assistance.
+                    {% endif %}
+                </li>
+                <li>
+                    {% if g.language == 'fr' %}
+                    Explorez les <a href="#how-to-use">guides de démarrage</a> pour configurer votre bot.
+                    {% else %}
+                    Check out the <a href="#how-to-use">getting started guides</a> to set up your bot.
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+        <a href="{{ url_for('index') }}" class="cta-button">
+            {% if g.language == 'fr' %}Retour à l'accueil{% else %}Return Home{% endif %}
+        </a>
+    </div>
+</section>
+{% endblock %}

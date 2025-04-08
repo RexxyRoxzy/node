@@ -20,13 +20,16 @@
             <ul>
                 <li><a href="{{ url_for('index') }}">{% if g.language == 'fr' %}Accueil{% else %}Home{% endif %}</a></li>
                 <li><a href="{{ url_for('discord') }}">Discord</a></li>
-                <li><a href="{{ url_for('terms') }}">{% if g.language == 'fr' %}Termes et Confidentialité{% else %}Terms & Privacy{% endif %}</a></li>
+                <li><a href="#pricing">{% if g.language == 'fr' %}Tarifs{% else %}Pricing{% endif %}</a></li>
+                <li><a href="#how-to-use">{% if g.language == 'fr' %}Guide{% else %}How to Use{% endif %}</a></li>
+                <li><a href="#faq">{% if g.language == 'fr' %}FAQ{% else %}FAQ{% endif %}</a></li>
+                <li><a href="{{ url_for('terms') }}">{% if g.language == 'fr' %}Termes{% else %}Terms{% endif %}</a></li>
                 {% if current_user.is_anonymous %}
-                <li><a href="{{ url_for('login') }}">{% if g.language == 'fr' %}Se connecter{% else %}Login{% endif %}</a></li>
-                <li><a href="{{ url_for('register') }}">{% if g.language == 'fr' %}S'inscrire{% else %}Register{% endif %}</a></li>
+                <li><a href="{{ url_for('login') }}">{% if g.language == 'fr' %}Connexion{% else %}Login{% endif %}</a></li>
+                <li><a href="{{ url_for('register') }}">{% if g.language == 'fr' %}Inscription{% else %}Register{% endif %}</a></li>
                 {% else %}
                 <li><a href="{{ url_for('settings') }}">{% if g.language == 'fr' %}Paramètres{% else %}Settings{% endif %}</a></li>
-                <li><a href="{{ url_for('logout') }}">{% if g.language == 'fr' %}Se déconnecter{% else %}Logout{% endif %}</a></li>
+                <li><a href="{{ url_for('logout') }}">{% if g.language == 'fr' %}Déconnexion{% else %}Logout{% endif %}</a></li>
                 {% endif %}
             </ul>
         </nav>

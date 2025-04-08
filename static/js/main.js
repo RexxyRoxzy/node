@@ -126,4 +126,78 @@ document.addEventListener('DOMContentLoaded', function() {
         // Start animation
         animate();
     }
+    
+    // FAQ Section Functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    if (faqQuestions.length > 0) {
+        faqQuestions.forEach(question => {
+            // Set initial state (closed)
+            const answer = question.nextElementSibling;
+            answer.style.display = 'none';
+            
+            // Add click event listener
+            question.addEventListener('click', () => {
+                // Toggle the answer visibility
+                const isOpen = answer.style.display === 'block';
+                
+                // First close all answers
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.style.display = 'none';
+                });
+                
+                // Then open the clicked one if it was closed
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                    
+                    // Smooth scroll to this question if it's not fully visible
+                    const rect = question.getBoundingClientRect();
+                    if (rect.top < 0 || rect.bottom > window.innerHeight) {
+                        question.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+        });
+        
+        // Open the first FAQ by default
+        if (faqQuestions.length > 0) {
+            faqQuestions[0].nextElementSibling.style.display = 'block';
+        }
+    }
+    
+    // Auto-hide flash messages after 5 seconds
+    const flashMessages = document.querySelectorAll('.flash-message');
+    if (flashMessages.length > 0) {
+        setTimeout(() => {
+            flashMessages.forEach(message => {
+                message.style.opacity = '0';
+                message.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 500);
+            });
+        }, 5000);
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Offset for header height
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });

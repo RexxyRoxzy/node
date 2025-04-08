@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="checkout-cancel">
+    <div class="cancel-content">
+        <h1>{% if g.language == 'fr' %}Paiement Annulé{% else %}Payment Cancelled{% endif %}</h1>
+        <div class="cancel-message">
+            <p>
+                {% if g.language == 'fr' %}
+                Votre processus de paiement a été annulé. Aucun frais n'a été encouru.
+                {% else %}
+                Your payment process was cancelled. No charges were made.
+                {% endif %}
+            </p>
+            <p>
+                {% if g.language == 'fr' %}
+                Si vous avez rencontré des problèmes ou si vous avez des questions, n'hésitez pas à nous contacter.
+                {% else %}
+                If you experienced any issues or have questions, feel free to contact us.
+                {% endif %}
+            </p>
+        </div>
+        <div class="options">
+            <a href="{{ url_for('create_checkout_session') }}" class="cta-button">
+                {% if g.language == 'fr' %}Réessayer{% else %}Try Again{% endif %}
+            </a>
+            <a href="{{ url_for('index') }}" class="cta-button secondary">
+                {% if g.language == 'fr' %}Retour à l'accueil{% else %}Return Home{% endif %}
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
