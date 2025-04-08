@@ -1,0 +1,37 @@
+Generate the HTML, CSS, and minimal JavaScript for a three-page website designed to introduce and sell access to a Discord bot with customizable features.
+
+The overall aesthetic should be black and white, visually inspired by the clean design of draftbot.fr. The background of all pages should feature scattered white "point" particles. On mouse hover, these points should dynamically connect with short, white lines, creating a constellation-like effect similar to what can be seen on some modern web designs.
+
+The website should have the following three pages, accessible via a simple navigation menu in the header:
+
+Home/Buy Page:
+
+Clearly present the Discord bot and its features.
+Offer a base package for $5.99 that includes:
+Automod commands
+Admin commands
+Auto online status with options for "do not disturb," "afk," "online," and "invisible."
+Explain that users can request and pay extra for additional custom commands.
+Include a visually prominent call to action (e.g., a button) to purchase the bot or inquire about custom commands.
+Integrate the image from this URL: https://imgur.com/a/rkY5Qmi in a relevant and visually appealing way on this page.
+Discord Server Page:
+
+Provide clear instructions and a prominent link/button to join your Discord server for support, community, and potentially bot setup.
+Terms of Service & Privacy Policy Page:
+
+Include placeholders or basic structure for your Terms of Service and Privacy Policy. Emphasize that this content needs to be filled in with actual legal text.
+The layout should be clean and easy to navigate. Use a clear, readable black font on the white background. Ensure the constellation effect is subtle and doesn't distract from the content.
+
+Please provide the HTML structure for each page, the CSS to style the elements and create the black and white theme and the constellation background effect, and the necessary JavaScript to implement the interactive background."
+
+Explanation of why this prompt is effective:
+
+Clear Objective: It explicitly states the goal: a three-page website for a Discord bot marketplace.
+Visual Inspiration: It provides a reference website (draftbot.fr) and a specific image to guide the AI's design choices.
+Color Scheme: It clearly defines the black and white color requirement.
+Unique Feature: It details the interactive constellation background effect.
+Page Breakdown: It outlines the content and functionality of each of the three pages.
+Key Selling Points: It lists the core features of the base bot package.
+Call to Action: It specifies the need for clear purchase and inquiry options.
+Technical Requirements: It requests the specific code languages needed (HTML, CSS, JavaScript).
+Guidance on Content: It reminds the AI about the need for actual legal text on the Terms of Service and Privacy Policy page
