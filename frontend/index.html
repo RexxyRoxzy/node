@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiscoBots.fr</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body class="light">
+    <canvas id="particles-js"></canvas>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="login.html" id="login-link">Login</a></li>
+                    <li><a href="register.html" id="register-link">Register</a></li>
+                    <li><a href="settings.html" id="settings-link" style="display: none;">Settings</a></li>
+                    <li><a href="#" id="logout-link" style="display: none;">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
+                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
+            </div>
+            <div class="language-toggle">
+                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
+                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="flash-messages" id="flash-messages"></div>
+            
+            <div class="user-greeting" id="user-greeting" style="display: none;">
+                Hello <span id="username"></span>!
+            </div>
+            
+            <section class="home-hero">
+                <div class="hero-content">
+                    <h1 id="welcome-text">Welcome to DiscoBots.fr</h1>
+                    <p id="intro-text">
+                        Discover a powerful and easy-to-use Discord bot that will enhance your server with amazing features.
+                    </p>
+                    <a href="discord.html" class="cta-button" id="add-discord-text">
+                        Add to Discord
+                    </a>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2 id="features-title">Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3 id="moderation-title">Moderation</h3>
+                        <p id="moderation-text">
+                            Keep your server clean and secure with advanced moderation tools.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 id="music-title">Music</h3>
+                        <p id="music-text">
+                            Play high-quality music from various platforms.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 id="customization-title">Customization</h3>
+                        <p id="customization-text">
+                            Tailor the bot to your server with extensive customization options.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 id="economy-title">Economy</h3>
+                        <p id="economy-text">
+                            Create an engaging economy system for your community.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pricing" id="pricing">
+                <h2 id="pricing-title">Pricing</h2>
+                
+                <div class="promotion-banner">
+                    <span id="promo-text">🔥 Special Offer: Use code <span class="coupon-code">DISCO30</span> for 30% off! 🔥</span>
+                </div>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3 id="standard-title">Standard</h3>
+                        <div class="price">$5.99</div>
+                        <ul class="pricing-features">
+                            <li id="features-access">Full access to all features</li>
+                            <li id="priority-support">Priority support</li>
+                            <li id="servers-limit">Up to 10 servers</li>
+                        </ul>
+                        <a href="#" class="cta-button" id="buy-button">
+                            Buy Now
+                        </a>
+                        <div style="margin-top: 10px; font-size: 0.9em;">
+                            <a href="#" id="discount-link" style="text-decoration: underline;">
+                                Use discount code
+                            </a>
+                        </div>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3 id="custom-title">Custom</h3>
+                        <div class="price" id="contact-us-text">Contact Us</div>
+                        <ul class="pricing-features">
+                            <li id="custom-features">Custom features</li>
+                            <li id="dedicated-support">24/7 Dedicated support</li>
+                            <li id="unlimited-servers">Unlimited servers</li>
+                        </ul>
+                        <a href="mailto:discobots.com@gmail.com" class="cta-button secondary" id="contact-button">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections would go here... -->
+            
+            <!-- FAQ, How to Use, Special Offer, Testimonials sections - abbreviated for brevity -->
+            
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html" id="footer-home">Home</a></li>
+                        <li><a href="discord.html">Discord</a></li>
+                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
+                        <li><a href="#pricing" id="footer-pricing">Pricing</a></li>
+                        <li><a href="#faq" id="footer-faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <p id="footer-contact-us">Contact Us</p>
+                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

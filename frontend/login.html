@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DiscoBots.fr</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+<body class="light">
+    <canvas id="particles-js"></canvas>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                    <li><a href="login.html" class="active">Login</a></li>
+                    <li><a href="register.html">Register</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <a href="#" class="theme-btn active" data-theme="light">☀️</a>
+                <a href="#" class="theme-btn" data-theme="dark">🌙</a>
+            </div>
+            <div class="language-toggle">
+                <a href="#" class="lang-btn active" data-lang="en">🇬🇧</a>
+                <a href="#" class="lang-btn" data-lang="fr">🇫🇷</a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="flash-messages" id="flash-messages"></div>
+            
+            <section class="auth-section">
+                <h1 id="login-title">Login</h1>
+                <div class="auth-container">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="username" id="username-label">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" id="password-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="remember_me" name="remember_me">
+                            <label for="remember_me" id="remember-me-label">Remember Me</label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="cta-button" id="login-button">Sign In</button>
+                        </div>
+                    </form>
+                    <div class="auth-links">
+                        <p id="need-account-text">
+                            Need an account? <a href="register.html" id="register-link-text">Register</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/logo.png" alt="DiscoBots.fr">
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html" id="footer-home">Home</a></li>
+                        <li><a href="discord.html">Discord</a></li>
+                        <li><a href="terms.html" id="footer-terms">Terms</a></li>
+                        <li><a href="index.html#pricing" id="footer-pricing">Pricing</a></li>
+                        <li><a href="index.html#faq" id="footer-faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <p id="footer-contact-us">Contact Us</p>
+                    <a href="mailto:discobots.com@gmail.com">discobots.com@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="copyright-text">&copy; 2024 DiscoBots.fr. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>
