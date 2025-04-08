@@ -32,9 +32,9 @@
                 </li>
                 <li>
                     {% if g.language == 'fr' %}
-                    Explorez les <a href="#how-to-use">guides de démarrage</a> pour configurer votre bot.
+                    Explorez les <a href="{{ url_for('index') }}#how-to-use">guides de démarrage</a> pour configurer votre bot.
                     {% else %}
-                    Check out the <a href="#how-to-use">getting started guides</a> to set up your bot.
+                    Check out the <a href="{{ url_for('index') }}#how-to-use">getting started guides</a> to set up your bot.
                     {% endif %}
                 </li>
             </ul>

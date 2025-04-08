@@ -3,7 +3,7 @@
 {% block content %}
 <section class="auth-section">
     <div class="auth-form">
-        <h1>{% if g.language == 'fr' %}Créer un compte{% else %}Register{% endif %}</h1>
+        <h1>{% if g.language == 'fr' %}Créer un compte{% else %}Create Account{% endif %}</h1>
         <form method="post" novalidate>
             {{ form.hidden_tag() }}
             <div class="form-group">

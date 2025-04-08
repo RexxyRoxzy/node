@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+import stripe
 from flask import Flask, render_template, redirect, url_for, flash, request, session, g
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
@@ -133,23 +134,38 @@ def set_theme(theme):
 
 @app.route('/create-checkout-session', methods=['GET', 'POST'])
 def create_checkout_session():
-    # Get Saleor API key and domain from environment variables
-    saleor_api_key = os.environ.get("SALEOR_API_KEY")
-    
-    # Set up headers for Saleor API requests
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {saleor_api_key}"
-    }
+    # Set Stripe API key from environment variable
+    stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
-    # For demo purposes, you would normally create or retrieve a real checkout
-    # Here we're just showing a success page
-    success_url = url_for('checkout_success', _external=True)
+    # Get domain for success and cancel URLs
+    domain_url = request.host_url.rstrip('/')
     
-    # In a real implementation, this would connect to Saleor API
-    # For now, we'll simply redirect to a success page
-    flash('Payment process initiated - Standard plan: $5.99')
-    return redirect(success_url)
+    try:
+        # Create new Checkout Session for the order
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'usd',
+                        'unit_amount': 599,  # $5.99 in cents
+                        'product_data': {
+                            'name': 'DiscoBots Standard Plan',
+                            'description': 'Full access to all features, priority support, up to 10 servers'
+                        },
+                    },
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=domain_url + url_for('checkout_success'),
+            cancel_url=domain_url + url_for('checkout_cancel'),
+        )
+        return redirect(checkout_session.url, code=303)
+    except Exception as e:
+        app.logger.error(f"Error creating checkout session: {str(e)}")
+        flash('An error occurred while processing your payment. Please try again.')
+        return redirect(url_for('index'))
 
 @app.route('/checkout/success')
 def checkout_success():

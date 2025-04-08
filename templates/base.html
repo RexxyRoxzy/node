@@ -25,8 +25,8 @@
                 <li><a href="#faq">{% if g.language == 'fr' %}FAQ{% else %}FAQ{% endif %}</a></li>
                 <li><a href="{{ url_for('terms') }}">{% if g.language == 'fr' %}Termes{% else %}Terms{% endif %}</a></li>
                 {% if current_user.is_anonymous %}
-                <li><a href="{{ url_for('login') }}">{% if g.language == 'fr' %}Connexion{% else %}Login{% endif %}</a></li>
-                <li><a href="{{ url_for('register') }}">{% if g.language == 'fr' %}Inscription{% else %}Register{% endif %}</a></li>
+                <li><a href="{{ url_for('login') }}">{% if g.language == 'fr' %}Connexion{% else %}Sign In{% endif %}</a></li>
+                <li><a href="{{ url_for('register') }}">{% if g.language == 'fr' %}Créer un compte{% else %}Create Account{% endif %}</a></li>
                 {% else %}
                 <li><a href="{{ url_for('settings') }}">{% if g.language == 'fr' %}Paramètres{% else %}Settings{% endif %}</a></li>
                 <li><a href="{{ url_for('logout') }}">{% if g.language == 'fr' %}Déconnexion{% else %}Logout{% endif %}</a></li>
