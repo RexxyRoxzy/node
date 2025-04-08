@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Discord Bot - Powerful Moderation & Admin Tool{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Power Up Your Discord Server</h1>
+        <p>Automod, Admin Commands, Custom Status, and more features to elevate your Discord experience.</p>
+        <div class="cta-buttons">
+            <a href="#pricing" class="btn btn-primary">Get Started</a>
+            <a href="{{ url_for('discord') }}" class="btn btn-secondary">Join Discord</a>
+        </div>
+    </div>
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1524114051012-0a2aa8dae4e1" alt="Discord Bot Dashboard" class="hero-img">
+    </div>
+</section>
+
+<section class="features">
+    <h2>Powerful Features</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Automod Commands</h3>
+            <p>Keep your server clean with automatic moderation. Filter spam, profanity, and more.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-user-cog"></i>
+            <h3>Admin Commands</h3>
+            <p>Comprehensive admin tools to manage your server efficiently and with ease.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-signal"></i>
+            <h3>Custom Status</h3>
+            <p>Automate your online status with options for "do not disturb," "afk," "online," and "invisible."</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-puzzle-piece"></i>
+            <h3>Custom Commands</h3>
+            <p>Request and pay for additional custom features tailored to your server's needs.</p>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="pricing">
+    <h2>Simple Pricing</h2>
+    <div class="pricing-container">
+        <div class="pricing-card">
+            <div class="pricing-header">
+                <h3>Basic Package</h3>
+                <div class="price">$5.99<span>/month</span></div>
+            </div>
+            <div class="pricing-features">
+                <ul>
+                    <li><i class="fas fa-check"></i> Automod Commands</li>
+                    <li><i class="fas fa-check"></i> Admin Commands</li>
+                    <li><i class="fas fa-check"></i> Custom Status Options</li>
+                    <li><i class="fas fa-check"></i> 24/7 Uptime</li>
+                    <li><i class="fas fa-check"></i> Basic Support</li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-primary">Get Started</a>
+        </div>
+
+        <div class="pricing-card featured">
+            <div class="pricing-header">
+                <div class="featured-tag">Popular</div>
+                <h3>Custom Package</h3>
+                <div class="price">Custom<span>/price</span></div>
+            </div>
+            <div class="pricing-features">
+                <ul>
+                    <li><i class="fas fa-check"></i> All Basic Features</li>
+                    <li><i class="fas fa-check"></i> Custom Commands</li>
+                    <li><i class="fas fa-check"></i> Priority Support</li>
+                    <li><i class="fas fa-check"></i> Advanced Configuration</li>
+                    <li><i class="fas fa-check"></i> Tailored to Your Needs</li>
+                </ul>
+            </div>
+            <a href="{{ url_for('discord') }}" class="btn btn-primary">Contact Us</a>
+        </div>
+    </div>
+</section>
+
+<section class="bot-showcase">
+    <div class="showcase-content">
+        <h2>Built for Discord Communities</h2>
+        <p>Our bot is designed with server management in mind, making moderation tasks efficient and simple.</p>
+        <ul class="showcase-features">
+            <li><i class="fas fa-bolt"></i> Lightning Fast Response</li>
+            <li><i class="fas fa-lock"></i> Secure and Reliable</li>
+            <li><i class="fas fa-cogs"></i> Easy to Configure</li>
+            <li><i class="fas fa-headset"></i> Dedicated Support</li>
+        </ul>
+        <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+    </div>
+    <div class="showcase-image">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Bot Dashboard" class="showcase-img">
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2>Ready to Enhance Your Discord Server?</h2>
+    <p>Join thousands of servers already using our Discord bot.</p>
+    <div class="cta-buttons">
+        <a href="#pricing" class="btn btn-primary">Get Started</a>
+        <a href="{{ url_for('discord') }}" class="btn btn-outline">Join Discord</a>
+    </div>
+</section>
+{% endblock %}
