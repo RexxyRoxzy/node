@@ -200,4 +200,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Countdown timer for special offer
+    const countdownElement = document.getElementById('countdown');
+    if (countdownElement) {
+        // Set the countdown for 48 hours
+        let hours = 47;
+        let minutes = 59;
+        let seconds = 59;
+        
+        const updateCountdown = () => {
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    if (hours === 0) {
+                        countdownElement.textContent = "Offer expired!";
+                        return;
+                    }
+                    hours--;
+                    minutes = 59;
+                } else {
+                    minutes--;
+                }
+                seconds = 59;
+            } else {
+                seconds--;
+            }
+            
+            // Format the time
+            const formattedHours = hours.toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            const formattedSeconds = seconds.toString().padStart(2, '0');
+            
+            countdownElement.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        };
+        
+        // Update the countdown every second
+        updateCountdown(); // Run immediately to avoid delay
+        setInterval(updateCountdown, 1000);
+    }
 });

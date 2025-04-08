@@ -65,6 +65,15 @@
 
 <section class="pricing" id="pricing">
     <h2>{% if g.language == 'fr' %}Tarification{% else %}Pricing{% endif %}</h2>
+    
+    <div class="promotion-banner">
+        {% if g.language == 'fr' %}
+        <span>🔥 Offre Spéciale: Utilisez le code <span class="coupon-code">Uflvb62d</span> pour obtenir 30% de réduction! 🔥</span>
+        {% else %}
+        <span>🔥 Special Offer: Use code <span class="coupon-code">Uflvb62d</span> for 30% off! 🔥</span>
+        {% endif %}
+    </div>
+    
     <div class="pricing-grid">
         <div class="pricing-card">
             <h3>{% if g.language == 'fr' %}Standard{% else %}Standard{% endif %}</h3>
@@ -77,6 +86,11 @@
             <a href="{{ url_for('create_checkout_session') }}" class="cta-button">
                 {% if g.language == 'fr' %}Acheter maintenant{% else %}Buy Now{% endif %}
             </a>
+            <div style="margin-top: 10px; font-size: 0.9em;">
+                <a href="{{ url_for('create_checkout_session', voucher='Uflvb62d') }}" style="text-decoration: underline;">
+                    {% if g.language == 'fr' %}Utiliser le code promotion{% else %}Use discount code{% endif %}
+                </a>
+            </div>
         </div>
         <div class="pricing-card featured">
             <h3>{% if g.language == 'fr' %}Personnalisé{% else %}Custom{% endif %}</h3>
@@ -200,6 +214,23 @@
             </div>
         </div>
     </div>
+</section>
+
+<section class="special-offer-section">
+    <h3>{% if g.language == 'fr' %}Offre exclusive pour les nouveaux utilisateurs{% else %}Exclusive Offer for New Users{% endif %}</h3>
+    <p>
+        {% if g.language == 'fr' %}
+        Inscrivez-vous aujourd'hui et obtenez un mois d'essai gratuit du plan Standard ! Pas besoin de carte de crédit.
+        {% else %}
+        Sign up today and get a free 1-month trial of the Standard plan! No credit card required.
+        {% endif %}
+    </p>
+    <div class="countdown-timer">
+        <span id="countdown">48:00:00</span>
+    </div>
+    <a href="{{ url_for('register') }}" class="cta-button">
+        {% if g.language == 'fr' %}S'inscrire maintenant{% else %}Sign Up Now{% endif %}
+    </a>
 </section>
 
 <section class="testimonials">

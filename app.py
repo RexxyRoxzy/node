@@ -140,11 +140,14 @@ def create_checkout_session():
     # Get domain for success and cancel URLs
     domain_url = request.host_url.rstrip('/')
     
+    # Get voucher code from the query parameters (if provided)
+    voucher_code = request.args.get('voucher')
+    
     try:
-        # Create new Checkout Session for the order using existing product
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
+        # Create checkout session parameters
+        checkout_params = {
+            'payment_method_types': ['card'],
+            'line_items': [
                 {
                     'price_data': {
                         'currency': 'usd',
@@ -154,10 +157,37 @@ def create_checkout_session():
                     'quantity': 1,
                 },
             ],
-            mode='payment',
-            success_url=domain_url + url_for('checkout_success'),
-            cancel_url=domain_url + url_for('checkout_cancel'),
-        )
+            'mode': 'payment',
+            'allow_promotion_codes': True,  # Allow users to enter their own promo codes
+            'success_url': domain_url + url_for('checkout_success'),
+            'cancel_url': domain_url + url_for('checkout_cancel'),
+        }
+        
+        # If voucher code is provided and it matches our special code, apply discount
+        if voucher_code == "Uflvb62d":
+            # Create a discount coupon on the fly if it doesn't exist
+            try:
+                # Check if the coupon already exists
+                stripe.Coupon.retrieve("Uflvb62d")
+            except Exception:
+                # Create the coupon if it doesn't exist
+                stripe.Coupon.create(
+                    id="Uflvb62d",
+                    percent_off=30,
+                    duration="once",
+                    name="30% Off Special Offer"
+                )
+            
+            # Add the discount to the checkout session
+            checkout_params['discounts'] = [
+                {
+                    'coupon': "Uflvb62d",
+                }
+            ]
+        
+        # Create the checkout session with all parameters
+        checkout_session = stripe.checkout.Session.create(**checkout_params)
+        
         return redirect(checkout_session.url, code=303)
     except Exception as e:
         app.logger.error(f"Error creating checkout session: {str(e)}")
