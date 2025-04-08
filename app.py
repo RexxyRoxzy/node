@@ -158,7 +158,6 @@ def create_checkout_session():
                 },
             ],
             'mode': 'payment',
-            'allow_promotion_codes': True,  # Allow users to enter their own promo codes
             'success_url': domain_url + url_for('checkout_success'),
             'cancel_url': domain_url + url_for('checkout_cancel'),
         }
@@ -184,6 +183,9 @@ def create_checkout_session():
                     'coupon': "Uflvb62d",
                 }
             ]
+        else:
+            # Only allow promotion codes if not applying a specific discount
+            checkout_params['allow_promotion_codes'] = True
         
         # Create the checkout session with all parameters
         checkout_session = stripe.checkout.Session.create(**checkout_params)
